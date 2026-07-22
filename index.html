@@ -301,7 +301,7 @@
             <td class="status"><span class="pill pending">Syncing</span><div class="statusnote">All seven images are ready in Plytix. The sync is bringing them to the live site. Will be Validated (WEB) once they appear.</div></td>
           </tr>
 
-          <tr class="grouphead" data-grouphead="storm" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Storm Surround</b> <span class="ghmeta">4 finishes</span></td><td colspan="8" class="ghsummary">2 of 4 on web, rest in progress</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">In progress</span></td></tr>
+          <tr class="grouphead" data-grouphead="storm" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Storm Surround</b> <span class="ghmeta">4 finishes</span></td><td colspan="8" class="ghsummary" data-autocount="1" data-suffix="on web, rest in progress"></td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">In progress</span></td></tr>
           <tr class="groupstart" data-group="storm" data-search="storm box · white evo60-box-white">
             <td class="model"><div class="mname">Storm Box · White</div><div class="sku">EVO60-BOX-WHITE</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
@@ -353,6 +353,22 @@
     var rows = Array.prototype.slice.call(document.querySelectorAll('tbody tr[data-search]'));
     var heads = Array.prototype.slice.call(document.querySelectorAll('tr.grouphead'));
 
+    // Auto-fill "X of Y on web" from the real rows, so the count can never be
+    // wrong by hand. A row counts as "on web" if its status shows "Validated".
+    function fillAutoCounts() {
+      heads.forEach(function (head) {
+        var cell = head.querySelector('[data-autocount]');
+        if (!cell) return;
+        var g = head.getAttribute('data-grouphead');
+        var groupRows = rows.filter(function (r) { return r.getAttribute('data-group') === g; });
+        var onWeb = groupRows.filter(function (r) {
+          var s = r.querySelector('.status');
+          return s && s.textContent.indexOf('Validated') !== -1;
+        }).length;
+        cell.textContent = onWeb + ' of ' + groupRows.length + ' ' + cell.getAttribute('data-suffix');
+      });
+    }
+
     // Show/hide a group's data rows based on its collapsed state.
     function renderGroup(head) {
       var g = head.getAttribute('data-grouphead');
@@ -365,6 +381,8 @@
         }
       });
     }
+
+    fillAutoCounts();
 
     heads.forEach(function (head) {
       renderGroup(head);
