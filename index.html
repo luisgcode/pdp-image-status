@@ -102,6 +102,18 @@
   /* thicker rule between models */
   tr.groupstart td { border-top: 2px solid var(--line); }
 
+  /* collapsible group headers */
+  tr.grouphead { cursor: pointer; }
+  tr.grouphead td { background: var(--head); border-top: 2px solid var(--line); border-bottom: 1px solid var(--line); padding: 11px 6px; }
+  tr.grouphead:hover td { background: #e9ece9; }
+  td.ghname { text-align: left; padding-left: 16px; font-size: 14px; white-space: nowrap; }
+  td.ghname b { font-weight: 700; }
+  .ghtoggle { display: inline-block; width: 14px; color: var(--ink-soft); font-size: 12px; }
+  .ghmeta { font-size: 12px; color: var(--ink-soft); font-family: var(--mono); margin-left: 6px; }
+  td.ghsummary { text-align: left; font-size: 12.5px; color: var(--ink-soft); }
+  td.ghstatus { text-align: left; padding-left: 16px; }
+  tr.rowhidden { display: none; }
+
   .mark { font-size: 15px; font-weight: 700; line-height: 1; }
   .mark.ok { color: var(--ok); }
   .mark.missing { color: var(--missing); }
@@ -180,36 +192,36 @@
           </tr>
         </thead>
         <tbody>
-          <!-- ===== IGNITE BOLD ===== -->
-          <tr class="groupstart" data-search="ignite bold 50 xlf5017-xd">
+          <tr class="grouphead" data-grouphead="bold" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Ignite Bold</b> <span class="ghmeta">5 sizes</span></td><td colspan="8" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
+          <tr class="groupstart" data-group="bold" data-search="ignite bold 50 xlf5017-xd">
             <td class="model"><div class="mname">Ignite Bold 50"</div><div class="sku">XLF5017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="ignite bold 60 xlf6017-xd">
+          <tr data-group="bold" data-search="ignite bold 60 xlf6017-xd">
             <td class="model"><div class="mname">Ignite Bold 60"</div><div class="sku">XLF6017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="ignite bold 74 xlf7417-xd">
+          <tr data-group="bold" data-search="ignite bold 74 xlf7417-xd">
             <td class="model"><div class="mname">Ignite Bold 74"</div><div class="sku">XLF7417-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="ignite bold 88 xlf8817-xd">
+          <tr data-group="bold" data-search="ignite bold 88 xlf8817-xd">
             <td class="model"><div class="mname">Ignite Bold 88"</div><div class="sku">XLF8817-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="ignite bold 100 xlf10017-xd">
+          <tr data-group="bold" data-search="ignite bold 100 xlf10017-xd">
             <td class="model"><div class="mname">Ignite Bold 100"</div><div class="sku">XLF10017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
@@ -217,8 +229,8 @@
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
 
-          <!-- ===== VITAL ESSENCE ===== -->
-          <tr class="groupstart" data-search="vital essence 42 esn42">
+          <tr class="grouphead" data-grouphead="essence" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Vital Essence</b> <span class="ghmeta">5 sizes</span></td><td colspan="8" class="ghsummary">All validated on web · 7/7</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
+          <tr class="groupstart" data-group="essence" data-search="vital essence 42 esn42">
             <td class="model"><div class="mname">Vital Essence 42"</div><div class="sku">ESN42</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
@@ -226,7 +238,7 @@
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="vital essence 50 esn50">
+          <tr data-group="essence" data-search="vital essence 50 esn50">
             <td class="model"><div class="mname">Vital Essence 50"</div><div class="sku">ESN50</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
@@ -234,7 +246,7 @@
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="vital essence 60 esn60">
+          <tr data-group="essence" data-search="vital essence 60 esn60">
             <td class="model"><div class="mname">Vital Essence 60"</div><div class="sku">ESN60</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
@@ -242,7 +254,7 @@
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="vital essence 74 esn74">
+          <tr data-group="essence" data-search="vital essence 74 esn74">
             <td class="model"><div class="mname">Vital Essence 74"</div><div class="sku">ESN74</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
@@ -250,7 +262,7 @@
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="vital essence 100 esn100">
+          <tr data-group="essence" data-search="vital essence 100 esn100">
             <td class="model"><div class="mname">Vital Essence 100"</div><div class="sku">ESN100</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
@@ -259,29 +271,29 @@
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
 
-          <!-- ===== IGNITE QUEST ===== -->
-          <tr class="groupstart" data-search="ignite quest 30 qst30">
+          <tr class="grouphead" data-grouphead="quest" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Ignite Quest</b> <span class="ghmeta">4 sizes</span></td><td colspan="8" class="ghsummary">Images loading to web</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">In progress</span></td></tr>
+          <tr class="groupstart" data-group="quest" data-search="ignite quest 30 qst30">
             <td class="model"><div class="mname">Ignite Quest 30"</div><div class="sku">QST30</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark wait">◔</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill pending">Currently loading</span><div class="statusnote">All seven images are in Plytix and currently loading onto the live site. Will be Validated (WEB) once they appear.</div></td>
           </tr>
-          <tr data-search="ignite quest 36 qst36">
+          <tr data-group="quest" data-search="ignite quest 36 qst36">
             <td class="model"><div class="mname">Ignite Quest 36"</div><div class="sku">QST36</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark wait">◔</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill pending">Currently loading</span><div class="statusnote">All seven images are in Plytix and currently loading onto the live site. Will be Validated (WEB) once they appear.</div></td>
           </tr>
-          <tr data-search="ignite quest 42 qst42">
+          <tr data-group="quest" data-search="ignite quest 42 qst42">
             <td class="model"><div class="mname">Ignite Quest 42"</div><div class="sku">QST42</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark wait">◔</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill pending">Currently loading</span><div class="statusnote">All seven images are in Plytix and currently loading onto the live site. Will be Validated (WEB) once they appear.</div></td>
           </tr>
-          <tr data-search="ignite quest 48 qst48">
+          <tr data-group="quest" data-search="ignite quest 48 qst48">
             <td class="model"><div class="mname">Ignite Quest 48"</div><div class="sku">QST48</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark wait">◔</span></td>
@@ -289,8 +301,8 @@
             <td class="status"><span class="pill pending">Currently loading</span><div class="statusnote">All seven images are in Plytix and currently loading onto the live site. Will be Validated (WEB) once they appear.</div></td>
           </tr>
 
-          <!-- ===== STORM SURROUND ===== -->
-          <tr class="groupstart" data-search="storm box · white evo60-box-white">
+          <tr class="grouphead" data-grouphead="storm" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Storm Surround</b> <span class="ghmeta">4 finishes</span></td><td colspan="8" class="ghsummary">1 of 4 on web, rest in progress</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">In progress</span></td></tr>
+          <tr class="groupstart" data-group="storm" data-search="storm box · white evo60-box-white">
             <td class="model"><div class="mname">Storm Box · White</div><div class="sku">EVO60-BOX-WHITE</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">NOT DEFINED</span></td>
@@ -298,7 +310,7 @@
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill pending">Not showing on the web yet</span><div class="statusnote">All images are already loaded in CommerceTools, but the product is not visible on the website yet.</div></td>
           </tr>
-          <tr data-search="storm box · black evo60-box-black">
+          <tr data-group="storm" data-search="storm box · black evo60-box-black">
             <td class="model"><div class="mname">Storm Box · Black</div><div class="sku">EVO60-BOX-BLACK</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">NOT DEFINED</span></td>
@@ -306,7 +318,7 @@
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
-          <tr data-search="storm panel · light oak evo60-pan-oak">
+          <tr data-group="storm" data-search="storm panel · light oak evo60-pan-oak">
             <td class="model"><div class="mname">Storm Panel · Light Oak</div><div class="sku">EVO60-PAN-OAK</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">NOT DEFINED</span></td>
@@ -314,7 +326,7 @@
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill pending">Not showing on the web yet</span><div class="statusnote">All images are already loaded in CommerceTools, but the product is not visible on the website yet.</div></td>
           </tr>
-          <tr data-search="storm panel · walnut evo60-pan-walnut">
+          <tr data-group="storm" data-search="storm panel · walnut evo60-pan-walnut">
             <td class="model"><div class="mname">Storm Panel · Walnut</div><div class="sku">EVO60-PAN-WALNUT</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">NOT DEFINED</span></td>
@@ -323,8 +335,8 @@
             <td class="status"><span class="pill pending">Not showing on the web yet</span><div class="statusnote">All images are already loaded in CommerceTools, but the product is not visible on the website yet.</div></td>
           </tr>
 
-          <!-- ===== REVILLUSION ===== -->
-          <tr class="groupstart" data-search="revillusion 5 models · 5–6 sizes each">
+          <tr class="grouphead" data-grouphead="revillusion" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Revillusion</b> <span class="ghmeta">5 models</span></td><td colspan="8" class="ghsummary">Auditing</td><td colspan="1"></td><td class="ghstatus"><span class="pill neutral">Auditing</span></td></tr>
+          <tr class="groupstart" data-group="revillusion" data-search="revillusion 5 models · 5–6 sizes each">
             <td class="model"><div class="mname">Revillusion</div><div class="sku">5 models · 5–6 sizes each</div></td>
             <td><span class="mark bydesign">·</span></td><td><span class="mark bydesign">·</span></td><td><span class="mark bydesign">·</span></td><td><span class="mark bydesign">·</span></td><td><span class="mark bydesign">·</span></td><td><span class="mark bydesign">·</span></td><td><span class="mark bydesign">·</span></td>
             <td class="video"><span class="mark bydesign">·</span></td>
@@ -347,19 +359,55 @@
     var input = document.getElementById('filter');
     var countEl = document.getElementById('filtercount');
     var rows = Array.prototype.slice.call(document.querySelectorAll('tbody tr[data-search]'));
+    var heads = Array.prototype.slice.call(document.querySelectorAll('tr.grouphead'));
 
-    function apply() {
-      var q = input.value.trim().toLowerCase();
-      var shown = 0;
+    // Show/hide a group's data rows based on its collapsed state.
+    function renderGroup(head) {
+      var g = head.getAttribute('data-grouphead');
+      var collapsed = head.getAttribute('data-collapsed') === '1';
+      var toggle = head.querySelector('.ghtoggle');
+      if (toggle) toggle.textContent = collapsed ? '▸' : '▾';
       rows.forEach(function (r) {
-        var hit = q === '' || r.getAttribute('data-search').indexOf(q) !== -1;
-        r.classList.toggle('hiddenrow', !hit);
-        if (hit) shown++;
+        if (r.getAttribute('data-group') === g) {
+          r.classList.toggle('rowhidden', collapsed);
+        }
       });
-      countEl.textContent = q === '' ? '' : shown + (shown === 1 ? ' size shown' : ' sizes shown');
     }
 
-    input.addEventListener('input', apply);
+    heads.forEach(function (head) {
+      renderGroup(head);
+      head.addEventListener('click', function () {
+        if (input.value.trim() !== '') return; // no manual collapse while filtering
+        var c = head.getAttribute('data-collapsed') === '1';
+        head.setAttribute('data-collapsed', c ? '0' : '1');
+        renderGroup(head);
+      });
+    });
+
+    // Filtering: when searching, expand everything and show only matches;
+    // hide group headers that have no visible rows. When cleared, restore
+    // each group's own collapsed state.
+    function applyFilter() {
+      var q = input.value.trim().toLowerCase();
+      if (q === '') {
+        heads.forEach(function (h) { h.classList.remove('rowhidden'); renderGroup(h); });
+        countEl.textContent = '';
+        return;
+      }
+      var shown = 0;
+      var groupHasHit = {};
+      rows.forEach(function (r) {
+        var hit = r.getAttribute('data-search').indexOf(q) !== -1;
+        r.classList.toggle('rowhidden', !hit);
+        if (hit) { shown++; groupHasHit[r.getAttribute('data-group')] = true; }
+      });
+      heads.forEach(function (h) {
+        h.classList.toggle('rowhidden', !groupHasHit[h.getAttribute('data-grouphead')]);
+      });
+      countEl.textContent = shown + (shown === 1 ? ' size shown' : ' sizes shown');
+    }
+
+    input.addEventListener('input', applyFilter);
   })();
 </script>
 </body>
