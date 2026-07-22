@@ -66,17 +66,15 @@
     background: var(--head); white-space: nowrap;
   }
   thead tr.grouprow th {
-    padding: 9px 6px; font-size: 11px; letter-spacing: .06em; border-bottom: 1px solid var(--line);
-    background: var(--head);
+    padding: 9px 6px; font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+    border-bottom: 1px solid var(--line); background: var(--head);
   }
   thead tr.grouprow th.gplytix {
-    color: var(--ink); font-weight: 700; border-left: 2px solid var(--line); border-right: 2px solid var(--line);
-    background: #eceeec;
+    color: var(--ink); font-weight: 750;
+    border-left: 2px solid var(--line); border-right: 2px solid var(--line);
   }
-  thead tr.grouprow th.gweb {
-    color: var(--accent); font-weight: 700; background: #e9f1ee;
-  }
-  thead tr.grouprow th.model { background: var(--head); border: none; }
+  thead tr.grouprow th.gweb { color: var(--accent); font-weight: 750; }
+  thead tr.grouprow th.model { background: transparent; border: none; }
   thead th.model { text-align: left; padding-left: 20px; min-width: 200px; }
   thead th.slot { min-width: 72px; }
   thead th.video { min-width: 62px; border-left: 2px solid var(--line); }
@@ -147,8 +145,8 @@
         <thead>
           <tr class="grouprow">
             <th class="model"></th>
-            <th class="gplytix" colspan="8">Loaded in Plytix (PIM)</th>
-            <th class="gweb" colspan="2">Live on the website</th>
+            <th class="gplytix" colspan="8">↓ These columns show what is loaded in Plytix (PIM) ↓</th>
+            <th class="gweb" colspan="2">Website</th>
           </tr>
           <tr>
             <th class="model">Product · SKU</th>
