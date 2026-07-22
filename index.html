@@ -68,19 +68,18 @@
   .filtercount { font-size: 12.5px; color: var(--ink-soft); }
   tr.hiddenrow { display: none; }
 
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(33,48,43,.05); }
-  .scroll { overflow-x: auto; overflow-y: visible; }
+  .tablewrap { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(33,48,43,.05); }
   table { border-collapse: collapse; width: 100%; min-width: 1120px; }
   thead th {
     text-align: center; font-size: 11px; letter-spacing: .02em; text-transform: uppercase;
     color: var(--ink-soft); font-weight: 650; padding: 12px 6px; border-bottom: 2px solid var(--line);
     background: var(--head); white-space: nowrap;
-    position: sticky; top: 34px; z-index: 2;
+    position: sticky; top: 33px; z-index: 5;
   }
   thead tr.grouprow th {
     padding: 9px 6px; font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
     border-bottom: 1px solid var(--line); background: var(--head);
-    position: sticky; top: 0; z-index: 3;
+    position: sticky; top: 0; z-index: 6; height: 33px;
   }
   thead tr.grouprow th.gplytix {
     color: var(--ink); font-weight: 750;
@@ -157,8 +156,7 @@
     <span class="filtercount" id="filtercount"></span>
   </div>
 
-  <div class="card">
-    <div class="scroll">
+  <div class="tablewrap">
       <table>
         <thead>
           <tr class="grouprow">
@@ -334,7 +332,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
   </div>
 
   <p class="fnote">All variants of a model currently share the same image set. Each SKU has its own row so any difference can be tracked as it comes up. Revillusion SKUs are added as we audit them.</p>
