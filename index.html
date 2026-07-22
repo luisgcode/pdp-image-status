@@ -63,8 +63,20 @@
   thead th {
     text-align: center; font-size: 11px; letter-spacing: .02em; text-transform: uppercase;
     color: var(--ink-soft); font-weight: 650; padding: 12px 6px; border-bottom: 2px solid var(--line);
-    background: var(--head); white-space: nowrap; position: sticky; top: 0;
+    background: var(--head); white-space: nowrap;
   }
+  thead tr.grouprow th {
+    padding: 9px 6px; font-size: 11px; letter-spacing: .06em; border-bottom: 1px solid var(--line);
+    background: var(--head);
+  }
+  thead tr.grouprow th.gplytix {
+    color: var(--ink); font-weight: 700; border-left: 2px solid var(--line); border-right: 2px solid var(--line);
+    background: #eceeec;
+  }
+  thead tr.grouprow th.gweb {
+    color: var(--accent); font-weight: 700; background: #e9f1ee;
+  }
+  thead tr.grouprow th.model { background: var(--head); border: none; }
   thead th.model { text-align: left; padding-left: 20px; min-width: 200px; }
   thead th.slot { min-width: 72px; }
   thead th.video { min-width: 62px; border-left: 2px solid var(--line); }
@@ -118,7 +130,7 @@
   <header>
     <p class="eyebrow">Dimplex · Product Carousel</p>
     <h1>PDP Image &amp; Video Status</h1>
-    <p class="lede">One row per size. Each carousel has seven image slots plus video. We mark each SKU as we confirm it, and the status column says what it is waiting on.</p>
+    <p class="lede">Image coverage in the PIM (Plytix) versus what is confirmed live on the website, one row per size.</p>
     <p class="updated">Last updated <b>July 22, 2026</b> · maintained by the web team</p>
   </header>
 
@@ -133,6 +145,11 @@
     <div class="scroll">
       <table>
         <thead>
+          <tr class="grouprow">
+            <th class="model"></th>
+            <th class="gplytix" colspan="8">Loaded in Plytix (PIM)</th>
+            <th class="gweb" colspan="2">Live on the website</th>
+          </tr>
           <tr>
             <th class="model">Product · SKU</th>
             <th class="slot">Front</th>
