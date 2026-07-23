@@ -91,8 +91,10 @@
   thead tr.grouprow th.model { background: transparent; border: none; }
   thead th.model { text-align: left; padding-left: 20px; min-width: 200px; }
   thead th.slot { min-width: 72px; }
-  thead th.slot small, thead th.video small { display: block; font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--neutral); text-transform: none; letter-spacing: 0; margin-top: 3px; }
+  thead th.slot small, thead th.video small, thead th.text small { display: block; font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--neutral); text-transform: none; letter-spacing: 0; margin-top: 3px; }
   thead th.video { min-width: 62px; }
+  thead th.text { min-width: 58px; }
+  td.text { text-align: center; }
   thead th.count { min-width: 54px; border-left: 2px solid var(--ink-soft); }
   thead th.status { text-align: left; min-width: 230px; padding-left: 16px; }
 
@@ -181,7 +183,7 @@
         <thead>
           <tr class="grouprow">
             <th class="model"></th>
-            <th class="gplytix" colspan="8">↓ These columns show what is loaded in Plytix ↓</th>
+            <th class="gplytix" colspan="9">↓ These columns show what is loaded in Plytix ↓</th>
             <th class="gweb" colspan="2">Website</th>
           </tr>
           <tr>
@@ -194,16 +196,18 @@
             <th class="slot">Feature 1<small>Web_4</small></th>
             <th class="slot">Feature 2<small>Web_5</small></th>
             <th class="slot video">Video</th>
+            <th class="slot text">Text<small>Bongiorno</small></th>
             <th class="count">Images</th>
             <th class="status">Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="grouphead" data-grouphead="ultra" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Ignite Ultra</b> <span class="ghmeta">linear fireplaces</span></td><td colspan="8" class="ghsummary">New family, review starting</td><td colspan="1"></td><td class="ghstatus"><span class="pill progress">In review</span></td></tr>
+          <tr class="grouphead" data-grouphead="ultra" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Ignite Ultra</b> <span class="ghmeta">linear fireplaces</span></td><td colspan="9" class="ghsummary">New family, review starting</td><td colspan="1"></td><td class="ghstatus"><span class="pill progress">In review</span></td></tr>
           <tr class="groupstart" data-group="ultra" data-search="ignite ultra 50 ult50 linear">
             <td class="model"><div class="mname">Ignite Ultra 50&quot; · Linear</div><div class="sku">ULT50</div></td>
             <td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
@@ -211,6 +215,7 @@
             <td class="model"><div class="mname">Ignite Ultra 60&quot; · Linear</div><div class="sku">ULT60</div></td>
             <td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
@@ -218,6 +223,7 @@
             <td class="model"><div class="mname">Ignite Ultra 74&quot; · Linear</div><div class="sku">ULT74</div></td>
             <td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
@@ -225,6 +231,7 @@
             <td class="model"><div class="mname">Ignite Ultra 88&quot; · Linear</div><div class="sku">ULT88</div></td>
             <td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
@@ -232,14 +239,16 @@
             <td class="model"><div class="mname">Ignite Ultra 100&quot; · Linear</div><div class="sku">ULT100</div></td>
             <td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td><td><span class="mark unchecked">·</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
-          <tr class="grouphead" data-grouphead="evolve" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Ignite Evolve</b> <span class="ghmeta">linear fireplaces</span></td><td colspan="8" class="ghsummary">Plytix review complete, all 7 slots on the 4 models · being deleted in CommerceTools end of day so the sync rebuilds them</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">Syncing tonight</span></td></tr>
+          <tr class="grouphead" data-grouphead="evolve" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Ignite Evolve</b> <span class="ghmeta">linear fireplaces</span></td><td colspan="9" class="ghsummary">Plytix review complete, all 7 slots on the 4 models · being deleted in CommerceTools end of day so the sync rebuilds them</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">Syncing tonight</span></td></tr>
           <tr class="groupstart" data-group="evolve" data-search="ignite evolve 50 evo50 linear">
             <td class="model"><div class="mname">Ignite Evolve 50&quot; · Linear</div><div class="sku">EVO50</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
@@ -247,6 +256,7 @@
             <td class="model"><div class="mname">Ignite Evolve 60&quot; · Linear</div><div class="sku">EVO60</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
@@ -254,6 +264,7 @@
             <td class="model"><div class="mname">Ignite Evolve 74&quot; · Linear</div><div class="sku">EVO74</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
@@ -261,15 +272,17 @@
             <td class="model"><div class="mname">Ignite Evolve 100&quot; · Linear</div><div class="sku">EVO100</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count"></td>
             <td class="status"></td>
           </tr>
-          <tr class="grouphead" data-grouphead="revillusion" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Revillusion</b> <span class="ghmeta">built-in fireboxes</span></td><td colspan="8" class="ghsummary">Plytix review complete · being deleted in CommerceTools end of day so the sync rebuilds them</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">Syncing tonight</span></td></tr>
+          <tr class="grouphead" data-grouphead="revillusion" data-collapsed="0"><td class="ghname"><span class="ghtoggle">▾</span> <b>Revillusion</b> <span class="ghmeta">built-in fireboxes</span></td><td colspan="9" class="ghsummary">Plytix review complete · being deleted in CommerceTools end of day so the sync rebuilds them</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">Syncing tonight</span></td></tr>
 
           <tr class="groupstart" data-group="revillusion" data-search="revillusion 24 black rev24-bl">
             <td class="model"><div class="mname">Revillusion 24" · Black</div><div class="sku">REV24-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"></td>
           </tr>
@@ -277,6 +290,7 @@
             <td class="model"><div class="mname">Revillusion 30" · Black</div><div class="sku">REV30-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"></td>
           </tr>
@@ -284,6 +298,7 @@
             <td class="model"><div class="mname">Revillusion 36" · Black</div><div class="sku">REV36-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"></td>
           </tr>
@@ -291,6 +306,7 @@
             <td class="model"><div class="mname">Revillusion 36" Portrait · Black</div><div class="sku">REV36P-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"></td>
           </tr>
@@ -298,6 +314,7 @@
             <td class="model"><div class="mname">Revillusion 42" · Black</div><div class="sku">REV42-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"></td>
           </tr>
@@ -306,6 +323,7 @@
             <td class="model"><div class="mname">Revillusion 24" · Herringbone</div><div class="sku">REV24-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -313,6 +331,7 @@
             <td class="model"><div class="mname">Revillusion 30" · Herringbone</div><div class="sku">REV30-HB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -320,6 +339,7 @@
             <td class="model"><div class="mname">Revillusion 36" · Herringbone</div><div class="sku">REV36-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -327,6 +347,7 @@
             <td class="model"><div class="mname">Revillusion 36" Portrait · Herringbone</div><div class="sku">REV36P-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -334,6 +355,7 @@
             <td class="model"><div class="mname">Revillusion 42" · Herringbone</div><div class="sku">REV42-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -342,6 +364,7 @@
             <td class="model"><div class="mname">Revillusion 24" · Neutral Brick</div><div class="sku">REV24-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -349,6 +372,7 @@
             <td class="model"><div class="mname">Revillusion 30" · Neutral Brick</div><div class="sku">REV30-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -356,6 +380,7 @@
             <td class="model"><div class="mname">Revillusion 36" · Neutral Brick</div><div class="sku">REV36-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -363,6 +388,7 @@
             <td class="model"><div class="mname">Revillusion 36" Portrait · Neutral Brick</div><div class="sku">REV36P-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -370,6 +396,7 @@
             <td class="model"><div class="mname">Revillusion 42" · Neutral Brick</div><div class="sku">REV42-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -378,6 +405,7 @@
             <td class="model"><div class="mname">Revillusion 24" · Weathered Concrete</div><div class="sku">REV24-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -385,6 +413,7 @@
             <td class="model"><div class="mname">Revillusion 30" · Weathered Concrete</div><div class="sku">REV30-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -392,6 +421,7 @@
             <td class="model"><div class="mname">Revillusion 36" · Weathered Concrete</div><div class="sku">REV36-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -399,6 +429,7 @@
             <td class="model"><div class="mname">Revillusion 36" Portrait · Weathered Concrete</div><div class="sku">REV36P-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
@@ -406,15 +437,17 @@
             <td class="model"><div class="mname">Revillusion 42" · Weathered Concrete</div><div class="sku">REV42-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">—</td>
             <td class="status"></td>
           </tr>
 
-          <tr class="grouphead" data-grouphead="bold" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Ignite Bold</b> <span class="ghmeta">5 sizes</span></td><td colspan="8" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
+          <tr class="grouphead" data-grouphead="bold" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Ignite Bold</b> <span class="ghmeta">5 sizes</span></td><td colspan="9" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
           <tr class="groupstart" data-group="bold" data-search="ignite bold 50 xlf5017-xd">
             <td class="model"><div class="mname">Ignite Bold 50"</div><div class="sku">XLF5017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -422,6 +455,7 @@
             <td class="model"><div class="mname">Ignite Bold 60"</div><div class="sku">XLF6017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -429,6 +463,7 @@
             <td class="model"><div class="mname">Ignite Bold 74"</div><div class="sku">XLF7417-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -436,6 +471,7 @@
             <td class="model"><div class="mname">Ignite Bold 88"</div><div class="sku">XLF8817-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -443,16 +479,18 @@
             <td class="model"><div class="mname">Ignite Bold 100"</div><div class="sku">XLF10017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
 
-          <tr class="grouphead" data-grouphead="essence" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Vital Essence</b> <span class="ghmeta">5 sizes</span></td><td colspan="8" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
+          <tr class="grouphead" data-grouphead="essence" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Vital Essence</b> <span class="ghmeta">5 sizes</span></td><td colspan="9" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
           <tr class="groupstart" data-group="essence" data-search="vital essence 42 esn42">
             <td class="model"><div class="mname">Vital Essence 42"</div><div class="sku">ESN42</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -461,6 +499,7 @@
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -469,6 +508,7 @@
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -477,6 +517,7 @@
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -485,15 +526,17 @@
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
 
-          <tr class="grouphead" data-grouphead="quest" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Ignite Quest</b> <span class="ghmeta">4 sizes</span></td><td colspan="8" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
+          <tr class="grouphead" data-grouphead="quest" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Ignite Quest</b> <span class="ghmeta">4 sizes</span></td><td colspan="9" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
           <tr class="groupstart" data-group="quest" data-search="ignite quest 30 qst30">
             <td class="model"><div class="mname">Ignite Quest 30"</div><div class="sku">QST30</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
           </tr>
@@ -501,6 +544,7 @@
             <td class="model"><div class="mname">Ignite Quest 36"</div><div class="sku">QST36</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
           </tr>
@@ -508,6 +552,7 @@
             <td class="model"><div class="mname">Ignite Quest 42"</div><div class="sku">QST42</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
           </tr>
@@ -515,16 +560,18 @@
             <td class="model"><div class="mname">Ignite Quest 48"</div><div class="sku">QST48</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
           </tr>
 
-          <tr class="grouphead" data-grouphead="storm" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Storm Surround</b> <span class="ghmeta">4 finishes</span></td><td colspan="8" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
+          <tr class="grouphead" data-grouphead="storm" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Storm Surround</b> <span class="ghmeta">4 finishes</span></td><td colspan="9" class="ghsummary">All validated on web</td><td colspan="1"></td><td class="ghstatus"><span class="pill ok">✓ Done</span></td></tr>
           <tr class="groupstart" data-group="storm" data-search="storm box · white evo60-box-white">
             <td class="model"><div class="mname">Storm Box · White</div><div class="sku">EVO60-BOX-WHITE</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
           </tr>
@@ -533,6 +580,7 @@
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -541,6 +589,7 @@
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
           </tr>
@@ -549,6 +598,7 @@
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
             <td class="video"><span class="mark bydesign">—</span></td>
+            <td class="text"><span class="mark unchecked">·</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
           </tr>
