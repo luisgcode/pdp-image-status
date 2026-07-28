@@ -829,7 +829,7 @@
           var missing = [];
           for (var i = 1; i <= 7; i++) {
             if (!tds[i]) continue;
-            if (tds[i].querySelector('.mark.missing')) {
+            if (tds[i].querySelector('.mark.missing') || tds[i].querySelector('.mark.bydesign')) {
               var why = tds[i].querySelector('.miniwhy');
               var note = why ? why.textContent.trim() : '';
               if (/luis/i.test(note)) continue; // Luis's own slots are not Olivia's list
