@@ -830,7 +830,9 @@
             if (!tds[i]) continue;
             if (tds[i].querySelector('.mark.missing')) {
               var why = tds[i].querySelector('.miniwhy');
-              missing.push(SLOTS[i - 1] + (why ? ' (' + why.textContent.trim() + ')' : ''));
+              var note = why ? why.textContent.trim() : '';
+              if (/luis/i.test(note)) continue; // Luis's own slots are not Olivia's list
+              missing.push(SLOTS[i - 1] + (note ? ' (' + note + ')' : ''));
             }
           }
           if (!missing.length) return;
