@@ -68,6 +68,19 @@
   #filter:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31,111,92,.12); }
   #filter::placeholder { color: #9aa4a0; }
   .filtercount { font-size: 12.5px; color: var(--ink-soft); }
+  #oliviabtn { margin-left: auto; background: #d9314e; color: #fff; border: none; border-radius: 6px; padding: 9px 18px; font-size: 13px; font-weight: 600; letter-spacing: 0.03em; cursor: pointer; }
+  #oliviabtn:hover { background: #b8253e; }
+  #oliviabtn.active { background: #1d1d1d; }
+  #oliviapanel { background: #fff; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; margin: 0 0 16px; overflow: hidden; }
+  .oppanel-head { padding: 12px 16px; background: #1d1d1d; color: #fff; display: flex; align-items: baseline; gap: 12px; }
+  .oppanel-head b { font-size: 14px; }
+  .oppanel-sub { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .oprow { display: flex; gap: 18px; padding: 9px 16px; border-top: 1px solid rgba(0,0,0,0.07); font-size: 13.5px; align-items: baseline; }
+  .oprow:nth-child(odd) { background: rgba(0,0,0,0.02); }
+  .opname { min-width: 300px; font-weight: 600; color: #1d1d1d; }
+  .opname small { font-family: var(--mono); font-weight: 400; color: var(--ink-soft); margin-left: 6px; }
+  .opmiss { color: #c0273f; font-weight: 500; }
+  .opempty { padding: 16px; color: var(--ink-soft); font-size: 13.5px; }
   tr.hiddenrow { display: none; }
 
   .tablewrap { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(33,48,43,.05); }
@@ -177,6 +190,15 @@
   <div class="filterbar">
     <input type="search" id="filter" placeholder="Filter by product or SKU… (e.g. bold, ESN60, storm)" autocomplete="off" />
     <span class="filtercount" id="filtercount"></span>
+    <button id="oliviabtn" type="button">Olivia</button>
+  </div>
+
+  <div id="oliviapanel" hidden>
+    <div class="oppanel-head">
+      <b>Missing images</b>
+      <span class="oppanel-sub">Every slot flagged in red on the board, model by model</span>
+    </div>
+    <div id="oplist"></div>
   </div>
 
   <div class="tablewrap">
@@ -790,6 +812,37 @@
 
     input.addEventListener('input', applyFilter);
   })();
+
+    // Olivia button: list every red-flagged slot, model by model
+    (function () {
+      var SLOTS = ['Front', 'Dimensions', 'Lifestyle 1', 'Lifestyle 2', 'Callouts', 'Feature 1', 'Feature 2'];
+      var btn = document.getElementById('oliviabtn');
+      var panel = document.getElementById('oliviapanel');
+      var list = document.getElementById('oplist');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        if (!panel.hidden) { panel.hidden = true; btn.classList.remove('active'); return; }
+        var html = '';
+        rows.forEach(function (r) {
+          var tds = r.querySelectorAll('td');
+          var missing = [];
+          for (var i = 1; i <= 7; i++) {
+            if (!tds[i]) continue;
+            if (tds[i].querySelector('.mark.missing')) {
+              var why = tds[i].querySelector('.miniwhy');
+              missing.push(SLOTS[i - 1] + (why ? ' (' + why.textContent.trim() + ')' : ''));
+            }
+          }
+          if (!missing.length) return;
+          var name = r.querySelector('.mname') ? r.querySelector('.mname').textContent.trim() : '';
+          var sku = r.querySelector('.sku') ? r.querySelector('.sku').textContent.trim() : '';
+          html += '<div class="oprow"><span class="opname">' + name + ' <small>' + sku + '</small></span><span class="opmiss">' + missing.join(' · ') + '</span></div>';
+        });
+        list.innerHTML = html || '<div class="opempty">Nothing missing right now. Every slot on the board is covered.</div>';
+        panel.hidden = false;
+        btn.classList.add('active');
+      });
+    })();
 </script>
 </body>
 </html>
