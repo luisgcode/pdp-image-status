@@ -823,7 +823,8 @@
       btn.addEventListener('click', function () {
         if (!panel.hidden) { panel.hidden = true; btn.classList.remove('active'); return; }
         var html = '';
-        rows.forEach(function (r) {
+        var oprows = Array.prototype.slice.call(document.querySelectorAll('tbody tr[data-search]'));
+        oprows.forEach(function (r) {
           var tds = r.querySelectorAll('td');
           var missing = [];
           for (var i = 1; i <= 7; i++) {
