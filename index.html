@@ -58,6 +58,7 @@
   .dot.pending { background: var(--pending); }
   .dot.missing { background: var(--missing); }
   .dot.bydesign { background: var(--neutral); }
+  .dot.wait { background: var(--pending); }
 
   .filterbar { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; }
   #filter {
@@ -184,6 +185,7 @@
     <span class="item"><span class="dot ok"></span>Done</span>
     <span class="item"><span class="dot missing"></span>Missing — reason shown</span>
     <span class="item"><span class="dot bydesign"></span>Not needed</span>
+    <span class="item"><span class="dot wait"></span>Video received, not on the web yet</span>
     <span class="item" style="margin-left:auto"><span class="pill ok">✓ Validated (WEB)</span> = live PDP matches Plytix, image for image — the date is when it was confirmed 100% correct</span>
   </div>
 
@@ -264,7 +266,7 @@
           <tr class="groupstart" data-group="vital-sense" data-search="vital sense 50 sen50 linear">
             <td class="model"><div class="mname">Vital Sense 50&quot; · Linear</div><div class="sku">SEN50</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -272,7 +274,7 @@
           <tr data-group="vital-sense" data-search="vital sense 60 sen60 linear">
             <td class="model"><div class="mname">Vital Sense 60&quot; · Linear</div><div class="sku">SEN60</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -280,7 +282,7 @@
           <tr data-group="vital-sense" data-search="vital sense 74 sen74 linear">
             <td class="model"><div class="mname">Vital Sense 74&quot; · Linear</div><div class="sku">SEN74</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -322,7 +324,7 @@
           <tr class="groupstart" data-group="optimyst-revive" data-search="optimyst revive 25 vapor abn15-rgb-am">
             <td class="model"><div class="mname">Optimyst Revive 25&quot; · Vapor Fireplace</div><div class="sku">ABN15-RGB-AM</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -331,7 +333,7 @@
           <tr class="groupstart" data-group="optimyst-mapleton" data-search="optimyst mapleton water vapor stove mpt-ls-am">
             <td class="model"><div class="mname">Optimyst Mapleton · Water Vapor Stove</div><div class="sku">MPT-LS-AM</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -365,7 +367,7 @@
           <tr class="groupstart" data-group="optimyst-aura" data-search="optimyst aura 30 3step-rgb-am vapor">
             <td class="model"><div class="mname">Optimyst Aura 30&quot; · Vapor</div><div class="sku">3STEP-RGB-AM</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 29, 2026</span></td>
@@ -374,7 +376,7 @@
           <tr class="groupstart" data-group="ultra" data-search="ignite ultra 50 ult50 linear">
             <td class="model"><div class="mname">Ignite Ultra 50&quot; · Linear</div><div class="sku">ULT50</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 29, 2026</span></td>
@@ -382,7 +384,7 @@
           <tr data-group="ultra" data-search="ignite ultra 60 ult60 linear">
             <td class="model"><div class="mname">Ignite Ultra 60&quot; · Linear</div><div class="sku">ULT60</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 29, 2026</span></td>
@@ -390,7 +392,7 @@
           <tr data-group="ultra" data-search="ignite ultra 74 ult74 linear">
             <td class="model"><div class="mname">Ignite Ultra 74&quot; · Linear</div><div class="sku">ULT74</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 29, 2026</span></td>
@@ -398,7 +400,7 @@
           <tr data-group="ultra" data-search="ignite ultra 88 ult88 linear">
             <td class="model"><div class="mname">Ignite Ultra 88&quot; · Linear</div><div class="sku">ULT88</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 29, 2026</span></td>
@@ -406,7 +408,7 @@
           <tr data-group="ultra" data-search="ignite ultra 100 ult100 linear">
             <td class="model"><div class="mname">Ignite Ultra 100&quot; · Linear</div><div class="sku">ULT100</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">No image source yet</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 29, 2026</span></td>
@@ -415,7 +417,7 @@
           <tr class="groupstart" data-group="xl" data-search="ignite xl 50 xlf50 linear">
             <td class="model"><div class="mname">Ignite XL 50&quot; · Linear</div><div class="sku">XLF50</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -423,7 +425,7 @@
           <tr data-group="xl" data-search="ignite xl 60 xlf60 linear">
             <td class="model"><div class="mname">Ignite XL 60&quot; · Linear</div><div class="sku">XLF60</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -431,7 +433,7 @@
           <tr data-group="xl" data-search="ignite xl 74 xlf74 linear">
             <td class="model"><div class="mname">Ignite XL 74&quot; · Linear</div><div class="sku">XLF74</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -439,7 +441,7 @@
           <tr data-group="xl" data-search="ignite xl 100 xlf100 linear">
             <td class="model"><div class="mname">Ignite XL 100&quot; · Linear</div><div class="sku">XLF100</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark bydesign">—</span><span class="miniwhy soft">Not defined with team yet</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -448,7 +450,7 @@
           <tr class="groupstart" data-group="evolve" data-search="ignite evolve 50 evo50 linear">
             <td class="model"><div class="mname">Ignite Evolve 50&quot; · Linear</div><div class="sku">EVO50</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -456,7 +458,7 @@
           <tr data-group="evolve" data-search="ignite evolve 60 evo60 linear">
             <td class="model"><div class="mname">Ignite Evolve 60&quot; · Linear</div><div class="sku">EVO60</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -464,7 +466,7 @@
           <tr data-group="evolve" data-search="ignite evolve 74 evo74 linear">
             <td class="model"><div class="mname">Ignite Evolve 74&quot; · Linear</div><div class="sku">EVO74</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -472,7 +474,7 @@
           <tr data-group="evolve" data-search="ignite evolve 100 evo100 linear">
             <td class="model"><div class="mname">Ignite Evolve 100&quot; · Linear</div><div class="sku">EVO100</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -482,7 +484,7 @@
           <tr class="groupstart" data-group="revillusion" data-search="revillusion 24 black rev24-bl">
             <td class="model"><div class="mname">Revillusion 24" · Black</div><div class="sku">REV24-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -490,7 +492,7 @@
           <tr data-group="revillusion" data-search="revillusion 30 black rev30-bl">
             <td class="model"><div class="mname">Revillusion 30" · Black</div><div class="sku">REV30-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -498,7 +500,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 black rev36-bl">
             <td class="model"><div class="mname">Revillusion 36" · Black</div><div class="sku">REV36-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -506,7 +508,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 portrait black rev36p-bl">
             <td class="model"><div class="mname">Revillusion 36" Portrait · Black</div><div class="sku">REV36P-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -514,7 +516,7 @@
           <tr data-group="revillusion" data-search="revillusion 42 black rev42-bl">
             <td class="model"><div class="mname">Revillusion 42" · Black</div><div class="sku">REV42-BL</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -523,7 +525,7 @@
           <tr data-group="revillusion" data-search="revillusion 24 herringbone rev24-hb">
             <td class="model"><div class="mname">Revillusion 24" · Herringbone</div><div class="sku">REV24-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 24, 2026</span></td>
@@ -531,7 +533,7 @@
           <tr data-group="revillusion" data-search="revillusion 30 herringbone rev30-hb">
             <td class="model"><div class="mname">Revillusion 30" · Herringbone</div><div class="sku">REV30-HB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -539,7 +541,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 herringbone rev36-hb">
             <td class="model"><div class="mname">Revillusion 36" · Herringbone</div><div class="sku">REV36-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 24, 2026</span></td>
@@ -547,7 +549,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 portrait herringbone rev36p-hb">
             <td class="model"><div class="mname">Revillusion 36" Portrait · Herringbone</div><div class="sku">REV36P-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 24, 2026</span></td>
@@ -555,7 +557,7 @@
           <tr data-group="revillusion" data-search="revillusion 42 herringbone rev42-hb">
             <td class="model"><div class="mname">Revillusion 42" · Herringbone</div><div class="sku">REV42-HB</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -564,7 +566,7 @@
           <tr data-group="revillusion" data-search="revillusion 24 neutral brick rev24-nb">
             <td class="model"><div class="mname">Revillusion 24" · Neutral Brick</div><div class="sku">REV24-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -572,7 +574,7 @@
           <tr data-group="revillusion" data-search="revillusion 30 neutral brick rev30-nb">
             <td class="model"><div class="mname">Revillusion 30" · Neutral Brick</div><div class="sku">REV30-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -580,7 +582,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 neutral brick rev36-nb">
             <td class="model"><div class="mname">Revillusion 36" · Neutral Brick</div><div class="sku">REV36-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 25, 2026</span></td>
@@ -588,7 +590,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 portrait neutral brick rev36p-nb">
             <td class="model"><div class="mname">Revillusion 36" Portrait · Neutral Brick</div><div class="sku">REV36P-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 6, 2026</span></td>
@@ -596,7 +598,7 @@
           <tr data-group="revillusion" data-search="revillusion 42 neutral brick rev42-nb">
             <td class="model"><div class="mname">Revillusion 42" · Neutral Brick</div><div class="sku">REV42-NB</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -605,7 +607,7 @@
           <tr data-group="revillusion" data-search="revillusion 24 weathered concrete rev24-wc">
             <td class="model"><div class="mname">Revillusion 24" · Weathered Concrete</div><div class="sku">REV24-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 24, 2026</span></td>
@@ -613,7 +615,7 @@
           <tr data-group="revillusion" data-search="revillusion 30 weathered concrete rev30-wc">
             <td class="model"><div class="mname">Revillusion 30" · Weathered Concrete</div><div class="sku">REV30-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 26, 2026</span></td>
@@ -621,7 +623,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 weathered concrete rev36-wc">
             <td class="model"><div class="mname">Revillusion 36" · Weathered Concrete</div><div class="sku">REV36-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 2, 2026</span></td>
@@ -629,7 +631,7 @@
           <tr data-group="revillusion" data-search="revillusion 36 portrait weathered concrete rev36p-wc">
             <td class="model"><div class="mname">Revillusion 36" Portrait · Weathered Concrete</div><div class="sku">REV36P-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 24, 2026</span></td>
@@ -637,7 +639,7 @@
           <tr data-group="revillusion" data-search="revillusion 42 weathered concrete rev42-wc">
             <td class="model"><div class="mname">Revillusion 42" · Weathered Concrete</div><div class="sku">REV42-WC</div></td>
 <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Waiting for the designer</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">6 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 24, 2026</span></td>
@@ -647,7 +649,7 @@
           <tr class="groupstart" data-group="bold" data-search="ignite bold 50 xlf5017-xd">
             <td class="model"><div class="mname">Ignite Bold 50"</div><div class="sku">XLF5017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -655,7 +657,7 @@
           <tr data-group="bold" data-search="ignite bold 60 xlf6017-xd">
             <td class="model"><div class="mname">Ignite Bold 60"</div><div class="sku">XLF6017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -663,7 +665,7 @@
           <tr data-group="bold" data-search="ignite bold 74 xlf7417-xd">
             <td class="model"><div class="mname">Ignite Bold 74"</div><div class="sku">XLF7417-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -671,7 +673,7 @@
           <tr data-group="bold" data-search="ignite bold 88 xlf8817-xd">
             <td class="model"><div class="mname">Ignite Bold 88"</div><div class="sku">XLF8817-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -679,7 +681,7 @@
           <tr data-group="bold" data-search="ignite bold 100 xlf10017-xd">
             <td class="model"><div class="mname">Ignite Bold 100"</div><div class="sku">XLF10017-XD</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -690,7 +692,7 @@
             <td class="model"><div class="mname">Vital Essence 42"</div><div class="sku">ESN42</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -699,7 +701,7 @@
             <td class="model"><div class="mname">Vital Essence 50"</div><div class="sku">ESN50</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -708,7 +710,7 @@
             <td class="model"><div class="mname">Vital Essence 60"</div><div class="sku">ESN60</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -717,7 +719,7 @@
             <td class="model"><div class="mname">Vital Essence 74"</div><div class="sku">ESN74</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -726,7 +728,7 @@
             <td class="model"><div class="mname">Vital Essence 100"</div><div class="sku">ESN100</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
             <td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 22, 2026</span></td>
@@ -736,7 +738,7 @@
           <tr class="groupstart" data-group="quest" data-search="ignite quest 30 qst30">
             <td class="model"><div class="mname">Ignite Quest 30"</div><div class="sku">QST30</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
@@ -744,7 +746,7 @@
           <tr data-group="quest" data-search="ignite quest 36 qst36">
             <td class="model"><div class="mname">Ignite Quest 36"</div><div class="sku">QST36</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
@@ -752,7 +754,7 @@
           <tr data-group="quest" data-search="ignite quest 42 qst42">
             <td class="model"><div class="mname">Ignite Quest 42"</div><div class="sku">QST42</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
@@ -760,7 +762,7 @@
           <tr data-group="quest" data-search="ignite quest 48 qst48">
             <td class="model"><div class="mname">Ignite Quest 48"</div><div class="sku">QST48</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Jul 23, 2026</span></td>
