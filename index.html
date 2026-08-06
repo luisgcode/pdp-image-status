@@ -102,6 +102,8 @@
     border-right: 2px solid var(--ink-soft);
   }
   thead tr.grouprow th.gweb { color: var(--accent); font-weight: 750; }
+  thead tr.grouprow th .gsrc { display: block; font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--neutral); text-transform: none; letter-spacing: 0; margin-top: 2px; }
+  thead tr.grouprow th.gvid, thead tr.grouprow th.gtxt { border-left: 1px dashed rgba(0,0,0,0.18); }
   thead tr.grouprow th.model { background: transparent; border: none; }
   thead th.model { text-align: left; padding-left: 20px; min-width: 200px; }
   thead th.slot { min-width: 72px; }
@@ -208,7 +210,9 @@
         <thead>
           <tr class="grouprow">
             <th class="model"></th>
-            <th class="gplytix" colspan="9">↓ These columns show what is loaded in Plytix ↓</th>
+            <th class="gplytix" colspan="7">↓ Images loaded in Plytix ↓<small class="gsrc">source: Olivia</small></th>
+            <th class="gplytix gvid" colspan="1">Video<small class="gsrc">source: Marissa</small></th>
+            <th class="gplytix gtxt" colspan="1">Text<small class="gsrc">source: Bongiorno</small></th>
             <th class="gweb" colspan="2">Website</th>
           </tr>
           <tr>
@@ -220,7 +224,7 @@
             <th class="slot">Callouts<small>Web_3</small></th>
             <th class="slot">Feature 1<small>Web_4</small></th>
             <th class="slot">Feature 2<small>Web_5</small></th>
-            <th class="slot video">Video</th>
+            <th class="slot video">Video<small>Marissa</small></th>
             <th class="slot text">Text reviewed<small>Bongiorno</small></th>
             <th class="count">Images</th>
             <th class="status">Status</th>
@@ -248,7 +252,7 @@
           <tr class="groupstart" data-group="optimyst-cassette-pro" data-search="optimyst cassette pro 500 vapor cdfi500-pro 781052113053">
             <td class="model"><div class="mname">Optimyst Cassette Pro 500 · Vapor Fireplace</div><div class="sku">CDFI500-PRO</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">5 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 5, 2026</span></td>
@@ -257,7 +261,7 @@
           <tr class="groupstart" data-group="optimyst-rgb-cassette" data-search="optimyst rgb cassette 500004172 vapor">
             <td class="model"><div class="mname">Optimyst RGB Cassette · Vapor</div><div class="sku">500004172</div></td>
             <td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td>
-            <td class="video"><span class="mark unchecked">·</span></td>
+            <td class="video"><span class="mark wait" title="Video received, not on the web yet">●</span></td>
             <td class="text"><span class="mark ok">✓</span></td>
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 4, 2026</span></td>
