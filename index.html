@@ -928,7 +928,15 @@
             }
           }
           if (!missing.length) return;
-          var name = r.querySelector('.mname') ? r.querySelector('.mname').textContent.trim() : '';
+          var nameEl = r.querySelector('.mname');
+          var name = '';
+          if (nameEl) {
+            // Clonar y quitar los botones de locale, para que no se cuelen en el nombre
+            var clone = nameEl.cloneNode(true);
+            var loc = clone.querySelector('.locales');
+            if (loc) { loc.parentNode.removeChild(loc); }
+            name = clone.textContent.trim();
+          }
           var sku = r.querySelector('.sku') ? r.querySelector('.sku').textContent.trim() : '';
           html += '<div class="oprow"><span class="opname">' + name + ' <small>' + sku + '</small></span><span class="opmiss">' + missing.join(' · ') + '</span></div>';
         });
