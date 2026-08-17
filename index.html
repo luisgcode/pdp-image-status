@@ -51,6 +51,14 @@
   .updated { color: var(--ink-soft); font-size: 13px; margin-top: 12px; }
   .updated b { color: var(--ink); font-weight: 650; }
 
+  .scoreline { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px; margin: 22px 0 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: 4px; font-size: 13px; }
+  .scoreline .sc { display: inline-flex; align-items: baseline; gap: 7px; }
+  .scoreline .scnum { font-size: 20px; font-weight: 700; line-height: 1; }
+  .scoreline .sclabel { color: var(--ink-soft); }
+  .scoreline .sc--ok .scnum { color: var(--ok); }
+  .scoreline .sc--pending .scnum { color: var(--pending); }
+  .scoreline .sc--total { margin-left: auto; color: var(--ink-soft); }
+  .scoreline .sc--total .scnum { color: var(--ink-soft); font-size: 15px; }
   .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; font-size: 13px; color: var(--ink-soft); margin: 26px 0 16px; }
   .legend .item { display: inline-flex; align-items: center; gap: 7px; }
   .dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
@@ -188,6 +196,8 @@
     <p class="lede">Image coverage in Plytix versus what is confirmed live on the website, one row per size.</p>
     <p class="updated">Last updated <b>August 10, 2026</b> · maintained by the web team</p>
   </header>
+
+  <div class="scoreline" id="scoreline"></div>
 
   <div class="legend">
     <span class="item"><span class="dot ok"></span>Done</span>
@@ -885,8 +895,32 @@
       });
     }
 
+    // One line summary: how many products sit in each state.
+    // Reads the pill of every product row, so it stays true on its own.
+    function renderScoreline() {
+      var box = document.getElementById('scoreline');
+      if (!box) return;
+      var counts = { done: 0, syncing: 0, review: 0 };
+      var rows = document.querySelectorAll('tbody tr[data-group]');
+      rows.forEach(function (r) {
+        var pill = r.querySelector('td.status .pill');
+        if (!pill) return;
+        var t = pill.textContent.trim().toLowerCase();
+        if (t.indexOf('validated') > -1 || t.indexOf('done') > -1) counts.done++;
+        else if (t.indexOf('syncing') > -1) counts.syncing++;
+        else if (t.indexOf('review') > -1) counts.review++;
+      });
+      var total = rows.length;
+      box.innerHTML =
+        '<span class="sc sc--ok"><span class="scnum">' + counts.done + '</span><span class="sclabel">done</span></span>' +
+        '<span class="sc sc--pending"><span class="scnum">' + counts.syncing + '</span><span class="sclabel">syncing</span></span>' +
+        '<span class="sc sc--pending"><span class="scnum">' + counts.review + '</span><span class="sclabel">in review</span></span>' +
+        '<span class="sc sc--total"><span class="scnum">' + total + '</span><span class="sclabel">products tracked</span></span>';
+    }
+
     fillAutoCounts();
     sortGroupsByStatus();
+    renderScoreline();
 
     heads.forEach(function (head) {
       renderGroup(head);
