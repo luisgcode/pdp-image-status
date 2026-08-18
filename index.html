@@ -916,6 +916,27 @@
         '<span class="sc sc--total"><span class="scnum">' + total + '</span><span class="sclabel">products tracked</span></span>';
     }
 
+    // Recalcula el "x / 7" de cada fila contando los checks reales de las celdas
+    // de imagen. La columna Video y la de Text quedan afuera a proposito: son
+    // slots aparte y nunca contaron para el score.
+    function recalcImageCounts() {
+      document.querySelectorAll('tbody tr[data-group]').forEach(function (row) {
+        var cell = row.querySelector('td.count');
+        if (!cell) return;
+        var tds = row.querySelectorAll('td');
+        var total = 0, done = 0;
+        for (var i = 1; i < tds.length; i++) {
+          var td = tds[i];
+          if (td.classList.contains('video') || td.classList.contains('text') ||
+              td.classList.contains('count') || td.classList.contains('status')) continue;
+          total++;
+          if (td.querySelector('.mark.ok')) done++;
+        }
+        if (total) cell.textContent = done + ' / ' + total;
+      });
+    }
+
+    recalcImageCounts();
     fillAutoCounts();
     sortGroupsByStatus();
     renderScoreline();
