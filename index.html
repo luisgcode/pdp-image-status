@@ -940,7 +940,13 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-19-17';
+  var BUILD = '2026-08-19-19';
+
+  // Shared store for the notes on Olivia's list. With these two empty the
+  // notes stay in each person's own browser; filled in, everyone sees the
+  // same ones. The bin holds nothing but these notes.
+  var NOTES_BIN = '6a85e4f3da38895dfef7fc4d';
+  var NOTES_KEY = '$2a$10$5yMQ97bY0qXCBo6Nh15IF.eeHhTXgKdIwYtOft.k0jUyGHvGjb/Sa';
   (function () {
     var el = document.getElementById('stamp');
     if (el) el.textContent = 'build ' + BUILD;
@@ -1322,19 +1328,62 @@
           }
         })();
 
-        // Notes live in this browser only. The board is a static page on
-        // GitHub Pages, so there is no server to write to: what Olivia
-        // types is kept in her own browser and stays until she clears it.
+        // Notes are shared through a small JSON store, so what Olivia writes
+        // is what I read. The board is a static page with no server of its
+        // own, hence the external store. Until it is configured, notes fall
+        // back to this browser only, which is better than losing them.
         var STORE = 'pdp-olivia-notes';
+        var SHARED = (typeof NOTES_BIN === 'string' && NOTES_BIN &&
+                      typeof NOTES_KEY === 'string' && NOTES_KEY);
+        var API = 'https://api.jsonbin.io/v3/b/' + (SHARED ? NOTES_BIN : '');
+
         function readNotes() {
           try { return JSON.parse(localStorage.getItem(STORE) || '{}'); }
           catch (e) { return {}; }
         }
         function writeNotes(all) {
           try { localStorage.setItem(STORE, JSON.stringify(all)); }
-          catch (e) { /* private mode or storage full: the note just will not persist */ }
+          catch (e) { /* private mode or storage full */ }
+        }
+
+        // Pull whatever is in the shared store and show it. The local copy is
+        // kept in step so the list still works if the store is unreachable.
+        function pullNotes(then) {
+          if (!SHARED) { then(readNotes()); return; }
+          fetch(API + '/latest', { headers: { 'X-Master-Key': NOTES_KEY } })
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+              var all = (d && d.record) || {};
+              writeNotes(all);
+              then(all);
+            })
+            .catch(function () { then(readNotes()); });
+        }
+
+        // Writes are queued: a note is saved locally straight away so nothing
+        // is ever lost, then pushed. Rapid typing collapses into one push.
+        var pushTimer = null;
+        function pushNotes(all) {
+          writeNotes(all);
+          if (!SHARED) return;
+          clearTimeout(pushTimer);
+          pushTimer = setTimeout(function () {
+            fetch(API, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json', 'X-Master-Key': NOTES_KEY },
+              body: JSON.stringify(all)
+            }).catch(function () { /* stays in this browser until it can be sent */ });
+          }, 900);
         }
         function autosize(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
+
+        pullNotes(function (saved) {
+          list.querySelectorAll('textarea[data-note]').forEach(function (t) {
+            var key = t.getAttribute('data-note');
+            if (saved[key] && !t.value) { t.value = saved[key]; t.classList.add('filled'); }
+            autosize(t);
+          });
+        });
 
         var saved = readNotes();
         list.querySelectorAll('textarea[data-note]').forEach(function (t) {
@@ -1345,7 +1394,7 @@
             var all = readNotes();
             if (t.value.trim() === '') { delete all[key]; t.classList.remove('filled'); }
             else { all[key] = t.value; t.classList.add('filled'); }
-            writeNotes(all);
+            pushNotes(all);
             autosize(t);
           });
         });
@@ -1377,7 +1426,7 @@
             var t = list.querySelector('textarea[data-note="' + key + '"]');
             var all = readNotes();
             delete all[key];
-            writeNotes(all);
+            pushNotes(all);
             if (t) { t.value = ''; t.classList.remove('filled'); autosize(t); t.focus(); }
           });
         });
