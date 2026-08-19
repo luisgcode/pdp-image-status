@@ -114,6 +114,11 @@
   }
   .stamp { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); margin-left: 8px;
            border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }
+  .refresh { font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--ink-soft);
+             background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+             padding: 2px 8px; margin-left: 6px; cursor: pointer; }
+  .refresh:hover { color: var(--accent); border-color: var(--accent); }
+  .refresh:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .stale { background: var(--missing); color: #fff; padding: 10px 32px; font-size: 13px; font-weight: 600; }
   .stale a { color: #fff; }
   .opwarn { background: var(--missing-soft); border-bottom: 1px solid var(--missing); color: var(--missing); padding: 12px 16px; font-size: 13px; }
@@ -289,7 +294,8 @@
     <h1>PDP Image &amp; Video Status</h1>
     <p class="lede">Image coverage in Plytix versus what is confirmed live on the website, one row per size.</p>
     <p class="updated">Last updated <b>August 19, 2026</b> · maintained by the web team
-      <span class="stamp" id="stamp" title="If this does not match what you were told, your browser is showing an old copy. Hold shift and reload."></span></p>
+      <span class="stamp" id="stamp" title="Which copy of the board you are looking at"></span>
+      <button type="button" class="refresh" id="refresh" title="Throw away the copy your browser saved and load the latest">Load the latest</button></p>
   </header>
 
   <div class="boardtabs" role="tablist">
@@ -934,10 +940,29 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-19-07';
+  var BUILD = '2026-08-19-08';
   (function () {
     var el = document.getElementById('stamp');
     if (el) el.textContent = 'build ' + BUILD;
+
+    // One button for anyone who suspects they are looking at an old board.
+    // It clears what the browser saved and comes back with a fresh copy.
+    var btn = document.getElementById('refresh');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        btn.textContent = 'Loading…';
+        var done = function () {
+          location.replace(location.pathname + '?v=' + Date.now());
+        };
+        try {
+          if (window.caches && caches.keys) {
+            caches.keys().then(function (keys) {
+              return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+            }).then(done, done);
+          } else { done(); }
+        } catch (e) { done(); }
+      });
+    }
     // Ask GitHub for the file with a cache buster and compare builds. If the
     // browser is serving something older, say so instead of letting the team
     // work from a stale list.
