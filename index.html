@@ -1215,14 +1215,119 @@
     // secondary = behind the see more toggle. Empty arrays mean the
     // product is on the list but I have not opened its page yet.
     var ATTR_DATA = [
+      { family: 'Prism', models: [
+        { name: 'Prism 34" · Linear', sku: 'BLF3451', primary: [], secondary: [] },
+        { name: 'Prism 50" · Linear', sku: 'BLF5051', primary: [], secondary: [] },
+        { name: 'Prism 74" · Linear', sku: 'BLF7451', primary: [], secondary: [] }
+      ]},
+      { family: 'Revillusion Log Sets', models: [
+        { name: 'Revillusion 25" Plug-In · Electric Log Set', sku: 'RLG25', primary: [], secondary: [] },
+        { name: 'Revillusion 20" Plug-In · Electric Log Set', sku: 'RLG20', primary: [], secondary: [] }
+      ]},
+      { family: 'Optimyst Cassette Pro 500', models: [
+        { name: 'Optimyst Cassette Pro 500 · Vapor Fireplace', sku: 'CDFI500-PRO', primary: [], secondary: [] }
+      ]},
+      { family: 'Optimyst RGB Cassette', models: [
+        { name: 'Optimyst RGB Cassette · Vapor', sku: '500004172', primary: [], secondary: [] }
+      ]},
+      { family: 'Vital Spark', models: [
+        { name: 'Vital Spark 26" · Built-In', sku: 'SPK26', primary: [], secondary: [] },
+        { name: 'Vital Spark 28" · Built-In', sku: 'SPK28', primary: [], secondary: [] },
+        { name: 'Vital Spark 33" · Built-In', sku: 'SPK33', primary: [], secondary: [] },
+        { name: 'Vital Spark 36" · Built-In', sku: 'SPK36', primary: [], secondary: [] },
+        { name: 'Vital Spark 42" · Built-In', sku: 'SPK42', primary: [], secondary: [] }
+      ]},
+      { family: 'Vital Sense', models: [
+        { name: 'Vital Sense 50" · Linear', sku: 'SEN50', primary: [], secondary: [] },
+        { name: 'Vital Sense 60" · Linear', sku: 'SEN60', primary: [], secondary: [] },
+        { name: 'Vital Sense 74" · Linear', sku: 'SEN74', primary: [], secondary: [] }
+      ]},
+      { family: 'Slim Linear', models: [
+        { name: 'Slim 36" · Linear', sku: 'PLF3614-XS', primary: [], secondary: [] },
+        { name: 'Slim 42" · Linear', sku: 'PLF4214-XS', primary: [], secondary: [] },
+        { name: 'Slim 50" · Linear', sku: 'PLF5014-XS', primary: [], secondary: [] },
+        { name: 'Slim 60" · Linear', sku: 'PLF6014-XS', primary: [], secondary: [] }
+      ]},
+      { family: 'Optimyst Revive', models: [
+        { name: 'Optimyst Revive 25" · Vapor Fireplace', sku: 'ABN15-RGB-AM', primary: [], secondary: [] }
+      ]},
+      { family: 'Optimyst Mapleton', models: [
+        { name: 'Optimyst Mapleton · Water Vapor Stove', sku: 'MPT-LS-AM', primary: [], secondary: [] }
+      ]},
+      { family: 'Optimyst Linear', models: [
+        { name: 'Optimyst 46" · Linear Vapor', sku: '781052136786', primary: [], secondary: [] },
+        { name: 'Optimyst 66" · Linear Vapor', sku: '781052136793', primary: [], secondary: [] },
+        { name: 'Optimyst 86" · Linear Vapor', sku: '781052136809', primary: [], secondary: [] }
+      ]},
+      { family: 'Optimyst Aura', models: [
+        { name: 'Optimyst Aura 30" · Vapor', sku: '3STEP-RGB-AM', primary: [], secondary: [] }
+      ]},
+      { family: 'Ignite Ultra', models: [
+        { name: 'Ignite Ultra 50" · Linear', sku: 'ULT50', primary: [], secondary: [] },
+        { name: 'Ignite Ultra 60" · Linear', sku: 'ULT60', primary: [], secondary: [] },
+        { name: 'Ignite Ultra 74" · Linear', sku: 'ULT74', primary: [], secondary: [] },
+        { name: 'Ignite Ultra 88" · Linear', sku: 'ULT88', primary: [], secondary: [] },
+        { name: 'Ignite Ultra 100" · Linear', sku: 'ULT100', primary: [], secondary: [] }
+      ]},
+      { family: 'Ignite XL', models: [
+        { name: 'Ignite XL 50" · Linear', sku: 'XLF50', primary: [], secondary: [] },
+        { name: 'Ignite XL 60" · Linear', sku: 'XLF60', primary: [], secondary: [] },
+        { name: 'Ignite XL 74" · Linear', sku: 'XLF74', primary: [], secondary: [] },
+        { name: 'Ignite XL 100" · Linear', sku: 'XLF100', primary: [], secondary: [] }
+      ]},
+      { family: 'Ignite Evolve', models: [
+        { name: 'Ignite Evolve 50" · Linear', sku: 'EVO50', primary: [], secondary: [] },
+        { name: 'Ignite Evolve 60" · Linear', sku: 'EVO60', primary: [], secondary: [] },
+        { name: 'Ignite Evolve 74" · Linear', sku: 'EVO74', primary: [], secondary: [] },
+        { name: 'Ignite Evolve 100" · Linear', sku: 'EVO100', primary: [], secondary: [] }
+      ]},
+      { family: 'Revillusion', models: [
+        { name: 'Revillusion 24" · Black', sku: 'REV24-BL', primary: [], secondary: [] },
+        { name: 'Revillusion 30" · Black', sku: 'REV30-BL', primary: [], secondary: [] },
+        { name: 'Revillusion 36" · Black', sku: 'REV36-BL', primary: [], secondary: [] },
+        { name: 'Revillusion 36" Portrait · Black', sku: 'REV36P-BL', primary: [], secondary: [] },
+        { name: 'Revillusion 42" · Black', sku: 'REV42-BL', primary: [], secondary: [] },
+        { name: 'Revillusion 24" · Herringbone', sku: 'REV24-HB', primary: [], secondary: [] },
+        { name: 'Revillusion 30" · Herringbone', sku: 'REV30-HB', primary: [], secondary: [] },
+        { name: 'Revillusion 36" · Herringbone', sku: 'REV36-HB', primary: [], secondary: [] },
+        { name: 'Revillusion 36" Portrait · Herringbone', sku: 'REV36P-HB', primary: [], secondary: [] },
+        { name: 'Revillusion 42" · Herringbone', sku: 'REV42-HB', primary: [], secondary: [] },
+        { name: 'Revillusion 24" · Neutral Brick', sku: 'REV24-NB', primary: [], secondary: [] },
+        { name: 'Revillusion 30" · Neutral Brick', sku: 'REV30-NB', primary: [], secondary: [] },
+        { name: 'Revillusion 36" · Neutral Brick', sku: 'REV36-NB', primary: [], secondary: [] },
+        { name: 'Revillusion 36" Portrait · Neutral Brick', sku: 'REV36P-NB', primary: [], secondary: [] },
+        { name: 'Revillusion 42" · Neutral Brick', sku: 'REV42-NB', primary: [], secondary: [] },
+        { name: 'Revillusion 24" · Weathered Concrete', sku: 'REV24-WC', primary: [], secondary: [] },
+        { name: 'Revillusion 30" · Weathered Concrete', sku: 'REV30-WC', primary: [], secondary: [] },
+        { name: 'Revillusion 36" · Weathered Concrete', sku: 'REV36-WC', primary: [], secondary: [] },
+        { name: 'Revillusion 36" Portrait · Weathered Concrete', sku: 'REV36P-WC', primary: [], secondary: [] },
+        { name: 'Revillusion 42" · Weathered Concrete', sku: 'REV42-WC', primary: [], secondary: [] }
+      ]},
       { family: 'Ignite Bold', models: [
-        { name: 'Ignite Bold 50"', sku: 'BLF5051', primary: [], secondary: [] },
-        { name: 'Ignite Bold 60"', sku: 'BLF6051', primary: [], secondary: [] },
-        { name: 'Ignite Bold 74"', sku: 'BLF7451', primary: [], secondary: [] }
+        { name: 'Ignite Bold 50"', sku: 'XLF5017-XD', primary: [], secondary: [] },
+        { name: 'Ignite Bold 60"', sku: 'XLF6017-XD', primary: [], secondary: [] },
+        { name: 'Ignite Bold 74"', sku: 'XLF7417-XD', primary: [], secondary: [] },
+        { name: 'Ignite Bold 88"', sku: 'XLF8817-XD', primary: [], secondary: [] },
+        { name: 'Ignite Bold 100"', sku: 'XLF10017-XD', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'] }
+      ]},
+      { family: 'Vital Essence', models: [
+        { name: 'Vital Essence 42"', sku: 'ESN42', primary: [], secondary: [] },
+        { name: 'Vital Essence 50"', sku: 'ESN50', primary: [], secondary: [] },
+        { name: 'Vital Essence 60"', sku: 'ESN60', primary: [], secondary: [] },
+        { name: 'Vital Essence 74"', sku: 'ESN74', primary: [], secondary: [] },
+        { name: 'Vital Essence 100"', sku: 'ESN100', primary: [], secondary: [] }
       ]},
       { family: 'Ignite Quest', models: [
-        { name: 'Ignite Quest 39"', sku: 'QST3951', primary: [], secondary: [] },
-        { name: 'Ignite Quest 50"', sku: 'QST5051', primary: [], secondary: [] }
+        { name: 'Ignite Quest 30"', sku: 'QST30', primary: [], secondary: [] },
+        { name: 'Ignite Quest 36"', sku: 'QST36', primary: [], secondary: [] },
+        { name: 'Ignite Quest 42"', sku: 'QST42', primary: [], secondary: [] },
+        { name: 'Ignite Quest 48"', sku: 'QST48', primary: [], secondary: [] }
+      ]},
+      { family: 'Storm Surround', models: [
+        { name: 'Storm Box · White', sku: 'EVO60-BOX-WHITE', primary: [], secondary: [] },
+        { name: 'Storm Box · Black', sku: 'EVO60-BOX-BLACK', primary: [], secondary: [] },
+        { name: 'Storm Panel · Light Oak', sku: 'EVO60-PAN-OAK', primary: [], secondary: [] },
+        { name: 'Storm Panel · Walnut', sku: 'EVO60-PAN-WALNUT', primary: [], secondary: [] }
       ]}
     ];
 
