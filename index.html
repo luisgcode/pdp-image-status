@@ -940,7 +940,7 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-19-14';
+  var BUILD = '2026-08-19-15';
   (function () {
     var el = document.getElementById('stamp');
     if (el) el.textContent = 'build ' + BUILD;
@@ -1441,10 +1441,10 @@
         { name: 'Ignite Ultra 100" · Linear', sku: 'ULT100', primary: ['BTU', 'Voltage', 'Product Height (in)', 'Warranty', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Heat Vent location', 'Remote Control', 'Size', 'Product Width(in)', 'Front Glass Type', 'Timer', 'Product Width(cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] }
       ]},
       { family: 'Ignite XL', models: [
-        { name: 'Ignite XL 50" · Linear', sku: 'XLF50', primary: [], secondary: [] },
-        { name: 'Ignite XL 60" · Linear', sku: 'XLF60', primary: [], secondary: [] },
-        { name: 'Ignite XL 74" · Linear', sku: 'XLF74', primary: [], secondary: [] },
-        { name: 'Ignite XL 100" · Linear', sku: 'XLF100', primary: [], secondary: [] }
+        { name: 'Ignite XL 50" · Linear', sku: 'XLF50', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
+        { name: 'Ignite XL 60" · Linear', sku: 'XLF60', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
+        { name: 'Ignite XL 74" · Linear', sku: 'XLF74', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
+        { name: 'Ignite XL 100" · Linear', sku: 'XLF100', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] }
       ]},
       { family: 'Ignite Evolve', models: [
         { name: 'Ignite Evolve 50" · Linear', sku: 'EVO50', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
@@ -1654,34 +1654,22 @@
              '<span class="sc sc--total"><span class="scnum">' + prods + '</span><span class="sclabel">products tracked</span></span>';
     }
 
-    // Families are ordered by how much attention they need, same idea as
-    // the images board: whatever I am working on sits at the top, and the
-    // ones I have not opened yet sink to the bottom.
-    //   0 = in progress, some models loaded and some not
-    //   1 = every model loaded, still uneven
-    //   2 = every model loaded and even, waiting for me to confirm it
-    //   3 = untouched, nothing loaded yet
-    // Nothing here is Done. Loading a product only records what its PDP
-    // shows today; confirming the data is right is my call, so a family
-    // stays open and in place until I mark it myself.
-    function attention(fam) {
+    // Now that every product is loaded, the board is ordered by how much
+    // information a family actually shows: the thinnest ones first, because
+    // those are the ones a customer learns the least from. Families I have
+    // not opened yet stay at the very top, since I cannot judge them at all.
+    function thinness(fam) {
       var loaded = fam.models.filter(function (m) { return allOf(m).length > 0; });
-      if (!loaded.length) return 3;
-      if (loaded.length < fam.models.length) return 0;
-      var leader = null;
+      if (!loaded.length) return -1;
+      var most = 0;
       loaded.forEach(function (m) {
-        if (!leader || allOf(m).length > allOf(leader).length) leader = m;
+        if (allOf(m).length > most) most = allOf(m).length;
       });
-      var lead = allOf(leader);
-      var uneven = loaded.some(function (m) {
-        if (allOf(m).length < lead.length) return true;
-        return allOf(m).some(function (a) { return lead.indexOf(a) === -1; });
-      });
-      return uneven ? 1 : 2;
+      return most;
     }
 
     ATTR_DATA
-      .map(function (f, i) { return { f: f, rank: attention(f), i: i }; })
+      .map(function (f, i) { return { f: f, rank: thinness(f), i: i }; })
       .sort(function (a, b) { return a.rank - b.rank || a.i - b.i; })
       .forEach(function (e) { board.appendChild(renderFamily(e.f)); });
 
