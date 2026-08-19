@@ -1117,7 +1117,19 @@
 
     // Olivia button: list every red-flagged slot, model by model
     (function () {
-      var SLOTS = ['Front', 'Dimensions', 'Lifestyle 1', 'Lifestyle 2', 'Callouts', 'Feature 1', 'Feature 2'];
+      // Read the slot names straight off the table header, so this list
+      // can never fall out of step with the columns again. Index 0 is the
+      // product cell, so the names line up with td index directly.
+      var SLOTS = Array.prototype.map.call(
+        document.querySelectorAll('thead tr:nth-child(2) th'),
+        function (th) {
+          var small = th.querySelector('small');
+          var t = th.cloneNode(true);
+          if (small) t.querySelector('small').remove();
+          return t.textContent.replace(/\s+/g, ' ').trim();
+        });
+      // Video is Marissa's, not Olivia's, so it never belongs on her list.
+      var SKIP = { 'Video': 1, 'Text reviewed': 1, 'Images': 1, 'Status': 1 };
       var btn = document.getElementById('oliviabtn');
       var panel = document.getElementById('oliviapanel');
       var list = document.getElementById('oplist');
@@ -1129,14 +1141,16 @@
         oprows.forEach(function (r) {
           var tds = r.querySelectorAll('td');
           var missing = [];
-          for (var i = 1; i <= 7; i++) {
+          for (var i = 1; i < tds.length; i++) {
             if (!tds[i]) continue;
+            var slot = SLOTS[i] || '';
+            if (!slot || SKIP[slot]) continue;
             if (tds[i].querySelector('.mark.missing') || tds[i].querySelector('.mark.bydesign')) {
               var why = tds[i].querySelector('.miniwhy');
               var note = why ? why.textContent.trim() : '';
               if (why && why.classList.contains('mine')) continue; // slots on my plate are not Olivia's list
               if (/luis/i.test(note)) continue; // same, when the note names me
-              missing.push(SLOTS[i - 1] + (note ? ' (' + note + ')' : ''));
+              missing.push(slot + (note ? ' (' + note + ')' : ''));
             }
           }
           if (!missing.length) return;
