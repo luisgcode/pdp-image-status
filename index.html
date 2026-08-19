@@ -107,6 +107,13 @@
   .opnote .opclear:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .opnote textarea.filled ~ .opclear { visibility: visible; }
   .opsaved { font-size: 12px; color: var(--ink-soft); margin-left: auto; }
+  .opexport {
+    font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    color: #fff; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 3px; padding: 4px 10px; cursor: pointer; margin-left: auto;
+  }
+  .opexport:hover { background: rgba(255,255,255,0.2); }
+  .opexport:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .opempty { padding: 16px; color: var(--ink-soft); font-size: 13.5px; }
   tr.hiddenrow { display: none; }
 
@@ -302,6 +309,7 @@
     <div class="oppanel-head">
       <b>Missing images</b>
       <span class="oppanel-sub">Every slot flagged in red on the board, model by model</span>
+      <button type="button" class="opexport" id="opexport">Copy all notes</button>
     </div>
     <div id="oplist"></div>
   </div>
@@ -1205,6 +1213,28 @@
             autosize(t);
           });
         });
+        // Notes live in this browser, so there has to be a way to get them
+        // out before they ever move to a shared store.
+        var exportBtn = document.getElementById('opexport');
+        if (exportBtn && !exportBtn.getAttribute('data-wired')) {
+          exportBtn.setAttribute('data-wired', '1');
+          exportBtn.addEventListener('click', function () {
+            var all = readNotes();
+            var keys = Object.keys(all);
+            var text = keys.length
+              ? keys.map(function (k) { return k + ': ' + all[k]; }).join(String.fromCharCode(10))
+              : 'No notes yet.';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(function () {
+                exportBtn.textContent = 'Copied ' + keys.length;
+                setTimeout(function () { exportBtn.textContent = 'Copy all notes'; }, 2000);
+              });
+            } else {
+              window.prompt('Copy these notes:', text);
+            }
+          });
+        }
+
         list.querySelectorAll('.opclear').forEach(function (b) {
           b.addEventListener('click', function () {
             var key = b.getAttribute('data-clear');
