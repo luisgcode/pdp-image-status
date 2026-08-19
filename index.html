@@ -299,7 +299,7 @@
             <td class="count">7 / 7</td>
             <td class="status"><span class="pill ok">✓ Validated (WEB)</span><span class="valdate">Aug 4, 2026</span></td>
           </tr>
-          <tr class="grouphead" data-grouphead="vital-spark" data-collapsed="1"><td class="ghname"><span class="ghtoggle">▸</span> <b>Vital Spark</b> <span class="ghmeta">built-in electric fireplaces</span></td><td colspan="9" class="ghsummary">New family · published on the web on Aug 19 · 0/7 loaded on the web on all five, rest waiting sync</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">Syncing</span></td></tr>
+          <tr class="grouphead" data-grouphead="vital-spark" data-collapsed="1" data-waitsync="1" data-note="published on the web on Aug 19"><td class="ghname"><span class="ghtoggle">▸</span> <b>Vital Spark</b> <span class="ghmeta">built-in electric fireplaces</span></td><td colspan="9" class="ghsummary">New family · published on the web on Aug 19 · 0/7 loaded on the web on all five, rest waiting sync</td><td colspan="1"></td><td class="ghstatus"><span class="pill pending">Syncing</span></td></tr>
           <tr class="groupstart" data-group="vital-spark" data-search="vital spark 26 spk26 built-in">
             <td class="model"><div class="mname">Vital Spark 26&quot; · Built-In </div><div class="sku">SPK26</div></td>
             <td><span class="mark ok">✓</span></td><td class="video"><span class="mark wait">●</span><span class="miniwhy soft">Video received, working on the sync</span></td><td><span class="mark ok">✓</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td><td><span class="mark missing">—</span><span class="miniwhy">Empty, no image</span></td><td><span class="mark ok">✓</span></td>
@@ -835,19 +835,90 @@
     var rows = Array.prototype.slice.call(document.querySelectorAll('tbody tr[data-search]'));
     var heads = Array.prototype.slice.call(document.querySelectorAll('tr.grouphead'));
 
-    // Auto-fill "X of Y on web" from the real rows, so the count can never be
-    // wrong by hand. A row counts as "on web" if its status shows "Validated".
-    function fillAutoCounts() {
+    // ---------------------------------------------------------------
+    // WORDING — every phrase the board can show lives here and nowhere
+    // else. If a state needs new words, it gets changed once, right here.
+    // No free text down in the rows.
+    // ---------------------------------------------------------------
+    var SAY = {
+      syncing:     'Syncing',
+      rowWaiting:  '0/7 loaded on the web, rest waiting sync',
+      ghWaiting:   function (n) { return 'Waiting on the sync, 0/7 on the web on all ' + n; },
+    };
+
+    // A group marked data-waitsync="1" is live on the web but the images
+    // have not come down yet. The checks stay marked (they are true in
+    // Plytix) and the board still reports 0, because the board measures
+    // the web. This is the one case where checks and count disagree
+    // on purpose, so it is a flag on the group, not hand edited cells.
+    function isWaitingSync(group) {
+      var head = document.querySelector('tr.grouphead[data-grouphead="' + group + '"]');
+      return !!head && head.getAttribute('data-waitsync') === '1';
+    }
+
+    // The count is derived from the real check marks, never typed by hand.
+    // Video and Text sit outside the score on purpose, they are separate slots.
+    function readRow(row) {
+      var tds = row.querySelectorAll('td');
+      var total = 0, done = 0;
+      for (var i = 1; i < tds.length; i++) {
+        var td = tds[i];
+        if (td.classList.contains('video') || td.classList.contains('text') ||
+            td.classList.contains('count') || td.classList.contains('status')) continue;
+        total++;
+        if (td.querySelector('.mark.ok')) done++;
+      }
+      if (isWaitingSync(row.getAttribute('data-group'))) done = 0;
+      return { done: done, total: total };
+    }
+
+    // Count, pill and note for every product row, all from the same read.
+    // Nothing here is written into the HTML by hand any more.
+    function renderRows() {
+      document.querySelectorAll('tbody tr[data-group]').forEach(function (row) {
+        var n = readRow(row);
+        if (!n.total) return;
+
+        var cell = row.querySelector('td.count');
+        if (cell) cell.textContent = n.done + ' / ' + n.total;
+
+        var status = row.querySelector('td.status');
+        if (!status || status.getAttribute('data-manual') === '1') return;
+
+        // Only the waiting-on-sync state is derived. Validated and Done are
+        // decisions I make once and the board keeps, they are not something
+        // the check marks can tell apart.
+        if (!isWaitingSync(row.getAttribute('data-group'))) return;
+
+        var keep = status.querySelector('.valdate');
+        status.innerHTML = '<span class="pill pending">' + SAY.syncing + '</span>' +
+                           '<span class="miniwhy soft">' + SAY.rowWaiting + '</span>';
+        if (keep) status.appendChild(keep);
+      });
+    }
+
+    // The group header follows the same rule as the rows: only the
+    // waiting-on-sync state is derived. Everything else is a summary I
+    // wrote on purpose, often carrying context the checks do not know
+    // (why a slot is empty, how a family was rebuilt), so it is left alone.
+    function renderHeads() {
       heads.forEach(function (head) {
-        var cell = head.querySelector('[data-autocount]');
-        if (!cell) return;
+        if (head.getAttribute('data-waitsync') !== '1') return;
+
         var g = head.getAttribute('data-grouphead');
-        var groupRows = rows.filter(function (r) { return r.getAttribute('data-group') === g; });
-        var onWeb = groupRows.filter(function (r) {
-          var s = r.querySelector('.status');
-          return s && s.textContent.indexOf('Validated') !== -1;
-        }).length;
-        cell.textContent = onWeb + ' of ' + groupRows.length + ' ' + cell.getAttribute('data-suffix');
+        var n = rows.filter(function (r) { return r.getAttribute('data-group') === g; }).length;
+        if (!n) return;
+
+        var note = head.getAttribute('data-note');
+        var sum = head.querySelector('.ghsummary');
+        if (sum) sum.textContent = SAY.ghWaiting(n) + (note ? ' · ' + note : '');
+
+        var st = head.querySelector('.ghstatus');
+        if (st) st.innerHTML = '<span class="pill pending">' + SAY.syncing + '</span>';
+
+        // A family waiting on the sync has nothing actionable to look at,
+        // so it folds away just like a finished one.
+        head.setAttribute('data-collapsed', '1');
       });
     }
 
@@ -906,7 +977,7 @@
         var t = pill.textContent.trim().toLowerCase();
         if (t.indexOf('validated') > -1 || t.indexOf('done') > -1) counts.done++;
         else if (t.indexOf('syncing') > -1) counts.syncing++;
-        else if (t.indexOf('review') > -1) counts.review++;
+        else counts.review++;
       });
       var total = rows.length;
       box.innerHTML =
@@ -916,28 +987,8 @@
         '<span class="sc sc--total"><span class="scnum">' + total + '</span><span class="sclabel">products tracked</span></span>';
     }
 
-    // Recalcula el "x / 7" de cada fila contando los checks reales de las celdas
-    // de imagen. La columna Video y la de Text quedan afuera a proposito: son
-    // slots aparte y nunca contaron para el score.
-    function recalcImageCounts() {
-      document.querySelectorAll('tbody tr[data-group]').forEach(function (row) {
-        var cell = row.querySelector('td.count');
-        if (!cell) return;
-        var tds = row.querySelectorAll('td');
-        var total = 0, done = 0;
-        for (var i = 1; i < tds.length; i++) {
-          var td = tds[i];
-          if (td.classList.contains('video') || td.classList.contains('text') ||
-              td.classList.contains('count') || td.classList.contains('status')) continue;
-          total++;
-          if (td.querySelector('.mark.ok')) done++;
-        }
-        if (total) cell.textContent = done + ' / ' + total;
-      });
-    }
-
-    recalcImageCounts();
-    fillAutoCounts();
+    renderRows();
+    renderHeads();
     sortGroupsByStatus();
     renderScoreline();
 
