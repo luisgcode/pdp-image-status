@@ -121,6 +121,11 @@
   .refresh:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .stale { background: var(--missing); color: #fff; padding: 10px 32px; font-size: 13px; font-weight: 600; }
   .stale a { color: #fff; }
+  .opstate { font-size: 10.5px; font-weight: 600; letter-spacing: .04em; white-space: nowrap;
+             align-self: center; min-width: 52px; }
+  .opstate.saving { color: var(--ink-soft); }
+  .opstate.saved { color: var(--ok); }
+  .opstate.failed { color: var(--missing); }
   .opwarn { background: var(--missing-soft); border-bottom: 1px solid var(--missing); color: var(--missing); padding: 12px 16px; font-size: 13px; }
   .opwarn ul { margin: 8px 0 0; padding-left: 20px; }
   .opwarn li { margin-bottom: 3px; }
@@ -940,7 +945,7 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-19-19';
+  var BUILD = '2026-08-19-21';
 
   // Shared store for the notes on Olivia's list. With these two empty the
   // notes stay in each person's own browser; filled in, everyone sees the
@@ -1262,6 +1267,7 @@
                   '<span class="opmiss">' + missing.join(' \u00b7 ') + '</span>' +
                   '<span class="opnote">' +
                     '<textarea rows="1" data-note="' + sku + '" placeholder="Add a note\u2026"></textarea>' +
+                    '<span class="opstate" data-state="' + sku + '" role="status"></span>' +
                     '<button type="button" class="opclear" data-clear="' + sku + '" title="Delete this note" aria-label="Delete note for ' + sku + '">\u00d7</button>' +
                   '</span>' +
                   '</div>';
@@ -1354,6 +1360,8 @@
             .then(function (r) { return r.json(); })
             .then(function (d) {
               var all = (d && d.record) || {};
+              delete all._empty;
+              delete all.start;
               writeNotes(all);
               then(all);
             })
@@ -1363,16 +1371,37 @@
         // Writes are queued: a note is saved locally straight away so nothing
         // is ever lost, then pushed. Rapid typing collapses into one push.
         var pushTimer = null;
-        function pushNotes(all) {
+        function setState(sku, text, cls) {
+          var el = sku && list.querySelector('.opstate[data-state="' + sku + '"]');
+          if (!el) return;
+          el.textContent = text;
+          el.className = 'opstate' + (cls ? ' ' + cls : '');
+          if (cls === 'saved') {
+            clearTimeout(el._t);
+            el._t = setTimeout(function () { el.textContent = ''; el.className = 'opstate'; }, 2200);
+          }
+        }
+        function pushNotes(all, sku) {
           writeNotes(all);
           if (!SHARED) return;
+          setState(sku, 'Saving', 'saving');
           clearTimeout(pushTimer);
           pushTimer = setTimeout(function () {
+            var payload = {};
+            Object.keys(all).forEach(function (k) { payload[k] = all[k]; });
+            if (!Object.keys(payload).length) payload._empty = true;
             fetch(API, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json', 'X-Master-Key': NOTES_KEY },
-              body: JSON.stringify(all)
-            }).catch(function () { /* stays in this browser until it can be sent */ });
+              body: JSON.stringify(payload)
+            })
+              .then(function (r) {
+                setState(sku, r.ok ? 'Saved' : 'Not saved', r.ok ? 'saved' : 'failed');
+              })
+              .catch(function () {
+                // kept in this browser, so nothing is lost, but say so
+                setState(sku, 'Not saved', 'failed');
+              });
           }, 900);
         }
         function autosize(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
@@ -1394,7 +1423,7 @@
             var all = readNotes();
             if (t.value.trim() === '') { delete all[key]; t.classList.remove('filled'); }
             else { all[key] = t.value; t.classList.add('filled'); }
-            pushNotes(all);
+            pushNotes(all, key);
             autosize(t);
           });
         });
@@ -1426,7 +1455,7 @@
             var t = list.querySelector('textarea[data-note="' + key + '"]');
             var all = readNotes();
             delete all[key];
-            pushNotes(all);
+            pushNotes(all, key);
             if (t) { t.value = ''; t.classList.remove('filled'); autosize(t); t.focus(); }
           });
         });
