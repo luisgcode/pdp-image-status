@@ -945,7 +945,7 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-19-21';
+  var BUILD = '2026-08-19-22';
 
   // Shared store for the notes on Olivia's list. With these two empty the
   // notes stay in each person's own browser; filled in, everyone sees the
@@ -1339,7 +1339,8 @@
         // own, hence the external store. Until it is configured, notes fall
         // back to this browser only, which is better than losing them.
         var STORE = 'pdp-olivia-notes';
-        var SHARED = (typeof NOTES_BIN === 'string' && NOTES_BIN &&
+        var SHARED = (typeof fetch === 'function' &&
+                      typeof NOTES_BIN === 'string' && NOTES_BIN &&
                       typeof NOTES_KEY === 'string' && NOTES_KEY);
         var API = 'https://api.jsonbin.io/v3/b/' + (SHARED ? NOTES_BIN : '');
 
