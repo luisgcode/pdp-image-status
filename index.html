@@ -112,6 +112,13 @@
     color: #fff; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
     border-radius: 3px; padding: 4px 10px; cursor: pointer; margin-left: auto;
   }
+  .stamp { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); margin-left: 8px;
+           border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }
+  .stale { background: var(--missing); color: #fff; padding: 10px 32px; font-size: 13px; font-weight: 600; }
+  .stale a { color: #fff; }
+  .opwarn { background: var(--missing-soft); border-bottom: 1px solid var(--missing); color: var(--missing); padding: 12px 16px; font-size: 13px; }
+  .opwarn ul { margin: 8px 0 0; padding-left: 20px; }
+  .opwarn li { margin-bottom: 3px; }
   .opexport:hover { background: rgba(255,255,255,0.2); }
   .opexport:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .opempty { padding: 16px; color: var(--ink-soft); font-size: 13.5px; }
@@ -281,7 +288,8 @@
     <p class="eyebrow">Dimplex · Product Carousel</p>
     <h1>PDP Image &amp; Video Status</h1>
     <p class="lede">Image coverage in Plytix versus what is confirmed live on the website, one row per size.</p>
-    <p class="updated">Last updated <b>August 10, 2026</b> · maintained by the web team</p>
+    <p class="updated">Last updated <b>August 19, 2026</b> · maintained by the web team
+      <span class="stamp" id="stamp" title="If this does not match what you were told, your browser is showing an old copy. Hold shift and reload."></span></p>
   </header>
 
   <div class="boardtabs" role="tablist">
@@ -924,6 +932,32 @@
 <div class="credit-tab">Marketing <strong>Lab</strong> · GDA</div>
 
 <script>
+  // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
+  // a glance whether their browser is showing the current copy.
+  var BUILD = '2026-08-19-07';
+  (function () {
+    var el = document.getElementById('stamp');
+    if (el) el.textContent = 'build ' + BUILD;
+    // Ask GitHub for the file with a cache buster and compare builds. If the
+    // browser is serving something older, say so instead of letting the team
+    // work from a stale list.
+    try {
+      fetch(location.pathname + '?cb=' + Date.now(), { cache: 'reload' })
+        .then(function (r) { return r.text(); })
+        .then(function (t) {
+          var m = t.match(/var BUILD = '([^']+)'/);
+          if (!m || m[1] === BUILD) return;
+          var bar = document.createElement('div');
+          bar.className = 'stale';
+          bar.innerHTML = 'You are looking at an old copy of this board (build ' + BUILD +
+            ', the current one is ' + m[1] + '). Hold shift and reload, or ' +
+            '<a href="' + location.pathname + '?v=' + m[1] + '">open the latest</a>.';
+          document.body.insertBefore(bar, document.body.firstChild);
+        })
+        .catch(function () {});
+    } catch (e) {}
+  })();
+
   (function () {
     var input = document.getElementById('filter');
     var countEl = document.getElementById('filtercount');
@@ -1185,6 +1219,66 @@
                   '</div>';
         });
         list.innerHTML = html || '<div class="opempty">Nothing missing right now. Every slot on the board is covered.</div>';
+
+        // Self check. This list is what the team works from, so it verifies
+        // itself against the board every time it opens.
+        // itself against the board every time it opens instead of trusting
+        // that the code above is right. Every red or grey slot on the board
+        // must appear here, and nothing here may point at a slot that is
+        // actually checked. If the two ever disagree, the panel says so
+        // rather than quietly showing the wrong thing.
+        (function verify() {
+          var problems = [];
+          var listed = {};
+          list.querySelectorAll('.oprow').forEach(function (row) {
+            var sku = row.querySelector('.opname small').textContent.trim();
+            listed[sku] = row.querySelector('.opmiss').textContent.split(' · ')
+              .map(function (t) { return t.replace(/\s*\(.*/, '').trim(); });
+          });
+
+          document.querySelectorAll('#imagesboard tbody tr[data-group]').forEach(function (r) {
+            var skuEl = r.querySelector('.sku');
+            if (!skuEl) return;
+            var sku = skuEl.textContent.trim();
+            var tds = r.querySelectorAll('td');
+            var shouldList = [];
+            for (var i = 1; i < tds.length; i++) {
+              var slot = SLOTS[i] || '';
+              if (!slot || SKIP[slot]) continue;
+              var cell = tds[i];
+              if (!cell.querySelector('.mark.missing') && !cell.querySelector('.mark.bydesign')) continue;
+              var why = cell.querySelector('.miniwhy');
+              var note = why ? why.textContent.trim() : '';
+              if (why && why.classList.contains('mine')) continue;
+              if (/luis/i.test(note)) continue;
+              shouldList.push(slot);
+            }
+            var got = listed[sku] || [];
+            shouldList.forEach(function (slot) {
+              if (got.indexOf(slot) === -1) problems.push(sku + ' is missing ' + slot + ' on the board but the list does not ask for it');
+            });
+            got.forEach(function (slot) {
+              if (shouldList.indexOf(slot) === -1) problems.push(sku + ' is asking for ' + slot + ' but that slot is not red on the board');
+            });
+          });
+
+          var warn = document.getElementById('opwarn');
+          if (!warn) {
+            warn = document.createElement('div');
+            warn.id = 'opwarn';
+            warn.className = 'opwarn';
+            list.parentNode.insertBefore(warn, list);
+          }
+          if (problems.length) {
+            warn.hidden = false;
+            warn.innerHTML = '<b>This list does not match the board.</b> Do not work from it until it is fixed.' +
+              '<ul>' + problems.slice(0, 12).map(function (p) { return '<li>' + p + '</li>'; }).join('') +
+              (problems.length > 12 ? '<li>and ' + (problems.length - 12) + ' more</li>' : '') + '</ul>';
+          } else {
+            warn.hidden = true;
+            warn.innerHTML = '';
+          }
+        })();
 
         // Notes live in this browser only. The board is a static page on
         // GitHub Pages, so there is no server to write to: what Olivia
