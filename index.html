@@ -1458,7 +1458,33 @@
              '<span class="sc sc--total"><span class="scnum">' + prods + '</span><span class="sclabel">products tracked</span></span>';
     }
 
-    ATTR_DATA.forEach(function (f) { board.appendChild(renderFamily(f)); });
+    // Families are ordered by how much attention they need, same idea as
+    // the images board: whatever I am working on sits at the top, and the
+    // ones I have not opened yet sink to the bottom.
+    //   0 = in progress, some models reviewed and some not
+    //   1 = fully reviewed but still uneven, there is work to do
+    //   2 = fully reviewed and even, nothing left
+    //   3 = untouched
+    function attention(fam) {
+      var loaded = fam.models.filter(function (m) { return allOf(m).length > 0; });
+      if (!loaded.length) return 3;
+      if (loaded.length < fam.models.length) return 0;
+      var leader = null;
+      loaded.forEach(function (m) {
+        if (!leader || allOf(m).length > allOf(leader).length) leader = m;
+      });
+      var lead = allOf(leader);
+      var uneven = loaded.some(function (m) {
+        if (allOf(m).length < lead.length) return true;
+        return allOf(m).some(function (a) { return lead.indexOf(a) === -1; });
+      });
+      return uneven ? 1 : 2;
+    }
+
+    ATTR_DATA
+      .map(function (f, i) { return { f: f, rank: attention(f), i: i }; })
+      .sort(function (a, b) { return a.rank - b.rank || a.i - b.i; })
+      .forEach(function (e) { board.appendChild(renderFamily(e.f)); });
 
     function paint(sec) {
       var collapsed = sec.getAttribute('data-collapsed') === '1';
