@@ -1304,9 +1304,9 @@
         { name: 'Revillusion 42" · Weathered Concrete', sku: 'REV42-WC', primary: [], secondary: [] }
       ]},
       { family: 'Ignite Bold', models: [
-        { name: 'Ignite Bold 50"', sku: 'XLF5017-XD', primary: [], secondary: [] },
-        { name: 'Ignite Bold 60"', sku: 'XLF6017-XD', primary: [], secondary: [] },
-        { name: 'Ignite Bold 74"', sku: 'XLF7417-XD', primary: [], secondary: [] },
+        { name: 'Ignite Bold 50"', sku: 'XLF5017-XD', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'] },
+        { name: 'Ignite Bold 60"', sku: 'XLF6017-XD', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'] },
+        { name: 'Ignite Bold 74"', sku: 'XLF7417-XD', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'] },
         { name: 'Ignite Bold 88"', sku: 'XLF8817-XD', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'] },
         { name: 'Ignite Bold 100"', sku: 'XLF10017-XD', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'] }
       ]},
@@ -1463,11 +1463,11 @@
     // ones I have not opened yet sink to the bottom.
     //   0 = in progress, some models reviewed and some not
     //   1 = fully reviewed but still uneven, there is work to do
-    //   2 = fully reviewed and even, nothing left
-    //   3 = untouched
+    //   2 = untouched, waiting for me to open it
+    //   3 = fully reviewed and even, nothing left to do
     function attention(fam) {
       var loaded = fam.models.filter(function (m) { return allOf(m).length > 0; });
-      if (!loaded.length) return 3;
+      if (!loaded.length) return 2;
       if (loaded.length < fam.models.length) return 0;
       var leader = null;
       loaded.forEach(function (m) {
@@ -1478,7 +1478,7 @@
         if (allOf(m).length < lead.length) return true;
         return allOf(m).some(function (a) { return lead.indexOf(a) === -1; });
       });
-      return uneven ? 1 : 2;
+      return uneven ? 1 : 3;
     }
 
     ATTR_DATA
