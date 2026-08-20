@@ -945,7 +945,7 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-20-02';
+  var BUILD = '2026-08-20-03';
 
   // Shared store for the notes on Olivia's list. With these two empty the
   // notes stay in each person's own browser; filled in, everyone sees the
@@ -1133,10 +1133,26 @@
         return 0; // review, waiting, blocked — anything still open
       }
 
+      // Within a group of the same rank, the one worked on most recently sits
+      // first, so a family I have just finished stays where I left it instead
+      // of sinking into the middle of the Done pile.
+      function touched(head) {
+        var g = head.getAttribute('data-grouphead');
+        var newest = 0;
+        rows.forEach(function (r) {
+          if (r.getAttribute('data-group') !== g) return;
+          var d = r.querySelector('.valdate');
+          if (!d) return;
+          var t = Date.parse(d.textContent.trim());
+          if (!isNaN(t) && t > newest) newest = t;
+        });
+        return newest;
+      }
+
       heads.map(function (head, i) {
-        return { head: head, rank: rank(head), i: i };
+        return { head: head, rank: rank(head), when: touched(head), i: i };
       }).sort(function (a, b) {
-        return a.rank - b.rank || a.i - b.i;
+        return a.rank - b.rank || b.when - a.when || a.i - b.i;
       }).forEach(function (entry) {
         var g = entry.head.getAttribute('data-grouphead');
         tbody.appendChild(entry.head);
