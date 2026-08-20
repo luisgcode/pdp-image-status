@@ -278,6 +278,9 @@
   .afchip.sec { background: var(--ok-soft); color: var(--ok); border: 1px dashed rgba(26,138,74,.45); }
   .afchip.off { background: var(--missing-soft); color: var(--missing); border: 1px solid rgba(217,49,78,.3); }
   .afchip.extra { background: var(--pending-soft); color: var(--pending); border: 1px solid rgba(176,125,16,.35); }
+  /* A stronger green for an attribute that was not there before and has since
+     been added, so progress is visible without reading a report. */
+  .afchip.fixed { background: rgba(26,138,74,.24); color: #0d6b37; border: 1px solid var(--ok); font-weight: 700; }
   .afempty { font-size: 12.5px; color: var(--ink-soft); }
   .afeven { font-size: 12.5px; color: var(--ok); }
 </style>
@@ -974,7 +977,7 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-20-14';
+  var BUILD = '2026-08-20-15';
 
   // Shared store for the notes on Olivia's list. With these two empty the
   // notes stay in each person's own browser; filled in, everyone sees the
@@ -1640,13 +1643,13 @@
         { name: 'Vital Essence 100"', sku: 'ESN100', primary: ['Product Height (in)', 'Product Depth/Length (in)', 'Product Width(in)', 'Model Name/Series', 'Model #', 'Wattage', 'Voltage', 'BTU', 'Warranty', 'Product Weight (lb)', 'Brand'], secondary: [] }
       ]},
       { family: 'Ignite Quest', models: [
-        { name: 'Ignite Quest 30"', sku: 'QST30', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [] },
-        { name: 'Ignite Quest 36"', sku: 'QST36', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [] },
-        { name: 'Ignite Quest 42"', sku: 'QST42', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [] },
-        { name: 'Ignite Quest 48"', sku: 'QST48', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [] }
+        { name: 'Ignite Quest 30"', sku: 'QST30', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [], fixed: ['Product Height (in)', 'Voltage'] },
+        { name: 'Ignite Quest 36"', sku: 'QST36', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [], fixed: ['Product Height (cm)', 'Product Height (in)', 'Voltage'] },
+        { name: 'Ignite Quest 42"', sku: 'QST42', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [], fixed: ['Product Height (cm)', 'Product Height (in)', 'Voltage'] },
+        { name: 'Ignite Quest 48"', sku: 'QST48', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [], fixed: ['Product Height (cm)', 'Product Height (in)', 'Voltage'] }
       ]},
       { family: 'Storm Surround', models: [
-        { name: 'Storm Box · White', sku: 'EVO60-BOX-WHITE', primary: ['Model Name/Series', 'Model #', 'Remote Control', 'Brand'], secondary: [] },
+        { name: 'Storm Box · White', sku: 'EVO60-BOX-WHITE', primary: ['Model Name/Series', 'Model #', 'Remote Control', 'Brand'], secondary: [], fixed: ['Remote Control'] },
         { name: 'Storm Box · Black', sku: 'EVO60-BOX-BLACK', primary: ['Model Name/Series', 'Model #', 'Remote Control', 'Brand'], secondary: [] },
         { name: 'Storm Panel · Light Oak', sku: 'EVO60-PAN-OAK', primary: ['Model Name/Series', 'Model #', 'Remote Control', 'Brand'], secondary: [] },
         { name: 'Storm Panel · Walnut', sku: 'EVO60-PAN-WALNUT', primary: ['Model Name/Series', 'Model #', 'Remote Control', 'Brand'], secondary: [] }
@@ -1763,13 +1766,23 @@
             h += '<div class="afgroup"><span class="aflabel">Not on the leader</span>' +
                  '<div class="afchips">' + chips(mineExtra, 'extra') + '</div></div>';
           }
+          // Anything in fixed was not on this product before, so it gets the
+          // stronger green and progress is visible without reading a report.
+          var fixed = m.fixed || [];
+          function chipsF(list, cls) {
+            return list.map(function (a) {
+              var isNew = fixed.indexOf(a) !== -1;
+              return '<span class="afchip ' + (isNew ? 'fixed' : cls) + '"' +
+                     (isNew ? ' title="Added since the baseline"' : '') + '>' + esc(a) + '</span>';
+            }).join('');
+          }
           if (m.primary.length) {
             h += '<div class="afgroup"><span class="aflabel">Primary</span>' +
-                 '<div class="afchips">' + chips(m.primary, 'on') + '</div></div>';
+                 '<div class="afchips">' + chipsF(m.primary, 'on') + '</div></div>';
           }
           if (m.secondary.length) {
             h += '<div class="afgroup"><span class="aflabel">Secondary \u00b7 behind see more</span>' +
-                 '<div class="afchips">' + chips(m.secondary, 'sec') + '</div></div>';
+                 '<div class="afchips">' + chipsF(m.secondary, 'sec') + '</div></div>';
           }
           if (!missing.length && m === leader && !extras.length) {
             h += '<div class="afeven">Sets the family standard</div>';
@@ -1878,6 +1891,7 @@
     var imagesLegend = legend ? legend.innerHTML : '';
     var attrLegend =
       '<span class="item"><span class="afchip on">Primary</span>&nbsp;shown in the main specs block</span>' +
+      '<span class="item"><span class="afchip fixed">Fixed</span>&nbsp;added since the baseline</span>' +
       '<span class="item"><span class="afchip sec">Secondary</span>&nbsp;only after clicking see more specifications</span>' +
       '<span class="item"><span class="afchip off">Missing</span>&nbsp;another model in the family shows it</span>' +
       '<span class="item"><span class="afchip extra">Not on the leader</span>&nbsp;add it to the family standard</span>';
