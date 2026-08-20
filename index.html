@@ -281,6 +281,13 @@
   /* A stronger green for an attribute that was not there before and has since
      been added, so progress is visible without reading a report. */
   .afchip.fixed { background: rgba(26,138,74,.24); color: #0d6b37; border: 1px solid var(--ok); font-weight: 700; }
+  /* Loaded in Plytix but not showing on the page: a backlog, not a gap in
+     the data, so it reads differently from a plain missing attribute. */
+  .afpending { background: var(--missing-soft); border: 1px solid rgba(217,49,78,.3);
+               border-radius: 4px; padding: 10px 13px; margin-bottom: 12px; font-size: 12.5px; }
+  .afpending b { color: var(--missing); }
+  .afpending .afchip { margin-right: 3px; }
+  .afpending .why { display: block; color: var(--ink-soft); margin-top: 5px; }
   .afempty { font-size: 12.5px; color: var(--ink-soft); }
   .afeven { font-size: 12.5px; color: var(--ok); }
 </style>
@@ -977,7 +984,7 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-20-15';
+  var BUILD = '2026-08-20-16';
 
   // Shared store for the notes on Olivia's list. With these two empty the
   // notes stay in each person's own browser; filled in, everyone sees the
@@ -1642,7 +1649,7 @@
         { name: 'Vital Essence 74"', sku: 'ESN74', primary: ['Product Height (in)', 'Product Depth/Length (in)', 'Product Width(in)', 'Model Name/Series', 'Model #', 'Wattage', 'Voltage', 'BTU', 'Warranty', 'Product Weight (lb)', 'Remote Control', 'Brand'], secondary: [] },
         { name: 'Vital Essence 100"', sku: 'ESN100', primary: ['Product Height (in)', 'Product Depth/Length (in)', 'Product Width(in)', 'Model Name/Series', 'Model #', 'Wattage', 'Voltage', 'BTU', 'Warranty', 'Product Weight (lb)', 'Brand'], secondary: [] }
       ]},
-      { family: 'Ignite Quest', models: [
+      { family: 'Ignite Quest', notShowing: { attributes: ['Wattage', 'Product Depth/Length (in)', 'Product Width(in)'], note: 'Bongiorno loaded these on Aug 19 under the Arena filter. Volts and Product Height came through, these three did not. They do work on Vital Sense and Vital Essence, so the attributes are fine and something is stopping them on the Quest.' }, models: [
         { name: 'Ignite Quest 30"', sku: 'QST30', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [], fixed: ['Product Height (in)', 'Voltage'] },
         { name: 'Ignite Quest 36"', sku: 'QST36', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [], fixed: ['Product Height (cm)', 'Product Height (in)', 'Voltage'] },
         { name: 'Ignite Quest 42"', sku: 'QST42', primary: ['Voltage', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: [], fixed: ['Product Height (cm)', 'Product Height (in)', 'Voltage'] },
@@ -1735,6 +1742,17 @@
       h += '<span class="afn">' + models.length + ' models</span>';
       h += '<span class="afverdict ' + vcls + '">' + verdict + '</span>';
       h += '</div>';
+
+      // Loaded in Plytix, verified as not showing on the page. Kept on the
+      // family so it is chased, not lost in a document.
+      var pending = fam.notShowing;
+      if (pending) {
+        h += '<div class="afpending"><b>Loaded in Plytix, not showing on the page:</b> ' +
+             pending.attributes.map(function (a) {
+               return '<span class="afchip off">' + esc(a) + '</span>';
+             }).join('') +
+             '<span class="why">' + esc(pending.note) + '</span></div>';
+      }
 
       if (extras.length) {
         h += '<div class="afalert"><b>Add to ' + esc(leader.name) + ':</b>' +
