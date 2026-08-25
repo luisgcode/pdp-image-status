@@ -1897,7 +1897,14 @@
       }
 
       h += '<div class="afcards">';
-      models.forEach(function (m) {
+      // The leader goes first and the rest follow by how much they show, so the
+      // standard is the first thing read and the gaps line up behind it.
+      var ordered = models.slice().sort(function (a, b) {
+        if (a === leader) return -1;
+        if (b === leader) return 1;
+        return allOf(b).length - allOf(a).length;
+      });
+      ordered.forEach(function (m) {
         var mine = allOf(m), n = mine.length;
         var blank = n === 0;
         var missing = blank ? [] : leadSet.filter(function (a) { return mine.indexOf(a) === -1; });
