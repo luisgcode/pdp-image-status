@@ -331,7 +331,7 @@
   <div class="legend">
     <span class="item"><span class="dot ok"></span>Done</span>
     <span class="item"><span class="dot missing"></span>Missing — reason shown</span>
-    <span class="item"><span class="dot bydesign"></span>Not needed</span>
+    <span class="item"><span class="dot bydesign"></span>Not needed, never getting filled, so not on the list</span>
     <span class="item"><span class="dot wait"></span>Video received, not loaded into Plytix yet</span>
     <span class="item" style="margin-left:auto"><span class="pill ok">✓ Validated (WEB)</span> = live PDP matches Plytix, image for image — the date is when it was confirmed 100% correct</span>
   </div>
@@ -1415,6 +1415,10 @@
               var note = why.textContent.trim();
               if (why && why.classList.contains('mine')) continue; // slots on my plate are not Olivia's list
               if (/luis/i.test(note)) continue; // same, when the note names me
+              // A slot that will never be filled is not work for anyone. This is
+              // different from "Not defined with team yet", which is still pending
+              // a decision and does belong on the list.
+              if (/^not needed/i.test(note)) continue;
               missing.push(slot + (note ? ' (' + note + ')' : ''));
             }
           }
