@@ -135,7 +135,7 @@
   tr.hiddenrow { display: none; }
 
   .tablewrap { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 1px 2px rgba(33,48,43,.05); }
-  table { border-collapse: collapse; width: 100%; min-width: 1120px; }
+  table { border-collapse: collapse; width: 100%; min-width: 1070px; }
   thead th {
     text-align: center; font-size: 11px; letter-spacing: .02em; text-transform: uppercase;
     color: var(--ink-soft); font-weight: 650; padding: 12px 6px; border-bottom: 2px solid var(--line);
@@ -158,7 +158,9 @@
   thead th.model { text-align: left; padding-left: 20px; min-width: 200px; }
   thead th.slot { min-width: 72px; }
   thead th.slot small, thead th.video small, thead th.text small { display: block; font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--neutral); text-transform: none; letter-spacing: 0; margin-top: 3px; }
-  thead th.video { min-width: 96px; }
+  thead th.video { min-width: 46px; width: 46px; padding-left: 2px; padding-right: 2px; }
+  thead th.video small { font-size: 8px; }
+  td.video { padding-left: 2px; padding-right: 2px; }
   td.video .miniwhy { color: var(--pending); font-weight: 600; }
   thead th.text { min-width: 58px; color: #2563a8; border-left: 1px dashed rgba(0,0,0,0.15); }
   td.text { text-align: center; background: rgba(37,99,168,0.05); border-left: 1px dashed rgba(0,0,0,0.12); }
