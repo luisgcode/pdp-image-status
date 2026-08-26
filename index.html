@@ -1863,10 +1863,15 @@
 
       // Anything another model shows that the leader does not is a gap
       // in the leader itself, so it gets called out for me to add.
+      // Except what the leader is already waiting on: that is its own gap in
+      // flight, so it stays on the leader card as amber instead of reading as
+      // somebody else's extra.
+      var leadLoading = (leader && leader.loading) || [];
       var extras = [];
       loaded.forEach(function (m) {
         allOf(m).forEach(function (a) {
-          if (leadSet.indexOf(a) === -1 && extras.indexOf(a) === -1) extras.push(a);
+          if (leadSet.indexOf(a) === -1 && extras.indexOf(a) === -1 &&
+              leadLoading.indexOf(a) === -1) extras.push(a);
         });
       });
 
