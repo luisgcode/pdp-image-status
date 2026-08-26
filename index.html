@@ -293,6 +293,7 @@
      been added, so progress is visible without reading a report. */
   .afchip.fixed { background: rgba(26,138,74,.24); color: #0d6b37; border: 1px solid var(--ok); font-weight: 700; }
   .afchip.loading { background: var(--pending-soft); color: var(--pending); border: 1px dashed var(--pending); font-weight: 700; }
+  .afwait { margin: 6px 0 8px; padding: 5px 9px; border-radius: 6px; font-size: 12px; font-weight: 600; background: var(--pending-soft); color: var(--pending); border: 1px dashed var(--pending); }
   /* Loaded in Plytix but not showing on the page: a backlog, not a gap in
      the data, so it reads differently from a plain missing attribute. */
   .afpending { background: var(--missing-soft); border: 1px solid rgba(217,49,78,.3);
@@ -1925,21 +1926,14 @@
         if (blank) {
           h += '<div class="afempty">Not loaded yet</div>';
         } else {
-          if (missing.length) {
-            h += '<div class="afgroup"><span class="aflabel">Missing</span>' +
-                 '<div class="afchips">' + chips(missing, 'off') + '</div></div>';
-          }
-          if (mineExtra.length) {
-            h += '<div class="afgroup"><span class="aflabel">Not on the leader</span>' +
-                 '<div class="afchips">' + chips(mineExtra, 'extra') + '</div></div>';
-          }
           // Anything in fixed was not on this product before, so it gets the
           // stronger green and progress is visible without reading a report.
           var fixed = m.fixed || [];
           // Loaded in Plytix and waiting for the overnight sync. Amber and
-          // dashed so it reads as in flight, not as done.
+          // dashed so it reads as in flight, not as done. Declared before the
+          // missing block because that block paints these chips too.
           var loading = m.loading || [];
-          function chipsF(list, cls) {
+          var chipsF = function (list, cls) {
             return list.map(function (a) {
               var isNew = fixed.indexOf(a) !== -1;
               var isLoad = loading.indexOf(a) !== -1;
@@ -1948,6 +1942,20 @@
                                : (isNew ? ' title="Added since the baseline"' : '');
               return '<span class="afchip ' + use + '"' + tip + '>' + esc(a) + '</span>';
             }).join('');
+          };
+          // The waiting line goes above the chips so the amber is explained
+          // before it is read, not after.
+          if (loading.length) {
+            h += '<div class="afwait">In Plytix, waiting for tonight: ' +
+                 loading.map(esc).join(', ') + '</div>';
+          }
+          if (missing.length) {
+            h += '<div class="afgroup"><span class="aflabel">Missing</span>' +
+                 '<div class="afchips">' + chipsF(missing, 'off') + '</div></div>';
+          }
+          if (mineExtra.length) {
+            h += '<div class="afgroup"><span class="aflabel">Not on the leader</span>' +
+                 '<div class="afchips">' + chipsF(mineExtra, 'extra') + '</div></div>';
           }
           if (m.primary.length) {
             h += '<div class="afgroup"><span class="aflabel">Primary</span>' +
