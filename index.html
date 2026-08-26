@@ -292,6 +292,7 @@
   /* A stronger green for an attribute that was not there before and has since
      been added, so progress is visible without reading a report. */
   .afchip.fixed { background: rgba(26,138,74,.24); color: #0d6b37; border: 1px solid var(--ok); font-weight: 700; }
+  .afchip.loading { background: var(--pending-soft); color: var(--pending); border: 1px dashed var(--pending); font-weight: 700; }
   /* Loaded in Plytix but not showing on the page: a backlog, not a gap in
      the data, so it reads differently from a plain missing attribute. */
   .afpending { background: var(--missing-soft); border: 1px solid rgba(217,49,78,.3);
@@ -1744,9 +1745,9 @@
       ]},
       { family: 'Ignite XL', models: [
         { name: 'Ignite XL 50" · Linear', sku: 'XLF50', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
-        { name: 'Ignite XL 60" · Linear', sku: 'XLF60', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
-        { name: 'Ignite XL 74" · Linear', sku: 'XLF74', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
-        { name: 'Ignite XL 100" · Linear', sku: 'XLF100', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] }
+        { name: 'Ignite XL 60" · Linear', sku: 'XLF60', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'], loading: ['Adjustable Flame Speed'] },
+        { name: 'Ignite XL 74" · Linear', sku: 'XLF74', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'], loading: ['Adjustable Flame Speed'] },
+        { name: 'Ignite XL 100" · Linear', sku: 'XLF100', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'], loading: ['Adjustable Flame Speed'] }
       ]},
       { family: 'Ignite Evolve', models: [
         { name: 'Ignite Evolve 50" · Linear', sku: 'EVO50', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
@@ -1926,7 +1927,7 @@
         } else {
           if (missing.length) {
             h += '<div class="afgroup"><span class="aflabel">Missing</span>' +
-                 '<div class="afchips">' + chips(missing, 'off') + '</div></div>';
+                 '<div class="afchips">' + chipsF(missing, 'off') + '</div></div>';
           }
           if (mineExtra.length) {
             h += '<div class="afgroup"><span class="aflabel">Not on the leader</span>' +
@@ -1935,11 +1936,17 @@
           // Anything in fixed was not on this product before, so it gets the
           // stronger green and progress is visible without reading a report.
           var fixed = m.fixed || [];
+          // Loaded in Plytix and waiting for the overnight sync. Amber and
+          // dashed so it reads as in flight, not as done.
+          var loading = m.loading || [];
           function chipsF(list, cls) {
             return list.map(function (a) {
               var isNew = fixed.indexOf(a) !== -1;
-              return '<span class="afchip ' + (isNew ? 'fixed' : cls) + '"' +
-                     (isNew ? ' title="Added since the baseline"' : '') + '>' + esc(a) + '</span>';
+              var isLoad = loading.indexOf(a) !== -1;
+              var use = isLoad ? 'loading' : (isNew ? 'fixed' : cls);
+              var tip = isLoad ? ' title="In Plytix, waiting for the overnight sync"'
+                               : (isNew ? ' title="Added since the baseline"' : '');
+              return '<span class="afchip ' + use + '"' + tip + '>' + esc(a) + '</span>';
             }).join('');
           }
           if (m.primary.length) {
@@ -2058,6 +2065,7 @@
     var attrLegend =
       '<span class="item"><span class="afchip on">Primary</span>&nbsp;shown in the main specs block</span>' +
       '<span class="item"><span class="afchip fixed">Fixed</span>&nbsp;added since the baseline</span>' +
+      '<span class="item"><span class="afchip loading">In the sync</span>&nbsp;loaded in Plytix, waiting for tonight</span>' +
       '<span class="item"><span class="afchip sec">Secondary</span>&nbsp;only after clicking see more specifications</span>' +
       '<span class="item"><span class="afchip off">Missing</span>&nbsp;another model in the family shows it</span>' +
       '<span class="item"><span class="afchip extra">Not on the leader</span>&nbsp;add it to the family standard</span>';
