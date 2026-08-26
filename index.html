@@ -1929,7 +1929,12 @@
         var mine = allOf(m), n = mine.length;
         var blank = n === 0;
         var missing = blank ? [] : leadSet.filter(function (a) { return mine.indexOf(a) === -1; });
-        var mineExtra = mine.filter(function (a) { return leadSet.indexOf(a) === -1; });
+        // What the leader is already waiting on is not an extra on anybody
+        // else: it lands on the leader tonight. Saying it twice, once as
+        // waiting and once as an extra, is the same fact under two labels.
+        var mineExtra = mine.filter(function (a) {
+          return leadSet.indexOf(a) === -1 && leadLoading.indexOf(a) === -1;
+        });
         var cls = 'afcard' + (blank ? ' blank' : (m === leader ? ' lead' : (missing.length ? ' short' : '')));
 
         h += '<div class="' + cls + '" data-search="dimplex ' + esc((m.name + ' ' + m.sku).toLowerCase()) + '">';
