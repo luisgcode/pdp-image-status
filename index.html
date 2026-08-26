@@ -2110,8 +2110,21 @@
         : 'Filter by product or SKU\u2026 (e.g. bold, ESN60, storm)';
       countEl.textContent = '';
     }
-    tabImg.addEventListener('click', function () { show('images'); });
-    tabAttr.addEventListener('click', function () { show('attrs'); });
+    // The tab lives in the URL, so #attributes can be bookmarked and a
+    // refresh lands back on the same tab instead of the images board.
+    function tabFromHash() {
+      return (location.hash || '').toLowerCase().indexOf('attr') !== -1
+        ? 'attrs' : 'images';
+    }
+    function goTo(which) {
+      var want = which === 'attrs' ? '#attributes' : '#images';
+      if (location.hash !== want) location.hash = want;
+      show(which);
+    }
+    tabImg.addEventListener('click', function () { goTo('images'); });
+    tabAttr.addEventListener('click', function () { goTo('attrs'); });
+    window.addEventListener('hashchange', function () { show(tabFromHash()); });
+    if (location.hash) show(tabFromHash());
   })();
 </script>
 </body>
