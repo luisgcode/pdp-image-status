@@ -296,6 +296,8 @@
   .afwait { margin: 6px 0 8px; padding: 5px 9px; border-radius: 6px; font-size: 12px; font-weight: 600; background: var(--pending-soft); color: var(--pending); border: 1px dashed var(--pending); }
   /* Loaded in Plytix but not showing on the page: a backlog, not a gap in
      the data, so it reads differently from a plain missing attribute. */
+  .afdropped { background: var(--panel-2, rgba(0,0,0,.04)); border: 1px solid var(--line, rgba(0,0,0,.14)); border-radius: 7px; padding: 8px 10px; margin: 8px 0; font-size: 12px; color: var(--ink-soft); }
+  .afdropped b { color: var(--ink); }
   .afpending { background: var(--missing-soft); border: 1px solid rgba(217,49,78,.3);
                border-radius: 4px; padding: 10px 13px; margin-bottom: 12px; font-size: 12.5px; }
   .afpending b { color: var(--missing); }
@@ -1670,10 +1672,10 @@
         { name: 'Optimyst RGB Pro Box 60" · Vapor', sku: 'CBX1500-AM', primary: ['Adjustable Flame Speed', 'Brand'], secondary: ['Battery Size in Remote Control', 'Battery Technology in Remote Control'] }
       ]},
       { family: 'e-MatriX', models: [
-        { name: 'e-MatriX 35" · One-sided', sku: 'FEF3226L1', primary: ['BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type'] },
+        { name: 'e-MatriX 35" · One-sided', sku: 'FEF3226L1', primary: ['BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type'], loading: ['Front Glass Type'] },
         { name: 'e-MatriX 37" · Left-facing', sku: 'FEF3226L2L', primary: ['BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type'] },
-        { name: 'e-MatriX 37" · Right-facing', sku: 'FEF3226L2R', primary: ['BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type'] },
-        { name: 'e-MatriX 39" · Three-sided', sku: 'FEF3226L3', primary: ['BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type'] }
+        { name: 'e-MatriX 37" · Right-facing', sku: 'FEF3226L2R', primary: ['BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type'], loading: ['Front Glass Type'] },
+        { name: 'e-MatriX 39" · Three-sided', sku: 'FEF3226L3', primary: ['BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type'], loading: ['Front Glass Type'] }
       ]},
       { family: 'Sierra', models: [
         { name: 'Sierra 48" · Linear', sku: 'SIL48', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type'] },
@@ -1684,8 +1686,8 @@
         { name: 'F-SERIES Electronic Onboard Thermostat', sku: 'BTF-1CW', primary: ['Model Name/Series', 'Thermostat Type', 'Built-in Thermostat', 'Voltage', 'Model #'], secondary: [] },
         { name: 'F-SERIES Thermostat Remote', sku: 'BTF-0RW', primary: ['Model Name/Series', 'Model #'], secondary: [] }
       ]},
-      { family: 'BF Series', models: [
-        { name: 'BF Deluxe 33" · Built-In', sku: 'BF33DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
+      { family: 'BF Series', dropped: { attributes: ['Display Type'], note: 'The 33 was the only one showing it and the value read None, which tells a shopper nothing. I cleared it in Plytix instead of loading it on the other three.' }, models: [
+        { name: 'BF Deluxe 33" · Built-In', sku: 'BF33DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
         { name: 'BF Deluxe 39" · Built-In', sku: 'BF39DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
         { name: 'BF Deluxe 45" · Built-In', sku: 'BF45DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
         { name: 'BF Standard 39" · Built-In', sku: 'BF39STP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] }
@@ -1895,6 +1897,14 @@
                return '<span class="afchip off">' + esc(a) + '</span>';
              }).join('') +
              '<span class="why">' + esc(pending.note) + '</span></div>';
+      }
+
+      // An attribute we decided to stop showing. Not a gap, so it reads
+      // neutral and the family stops being counted short for it.
+      if (fam.dropped) {
+        h += '<div class="afdropped"><b>Dropped on purpose:</b> ' +
+             esc(fam.dropped.attributes.join(', ')) + '. ' +
+             esc(fam.dropped.note) + '</div>';
       }
 
       if (extras.length) {
