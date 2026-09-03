@@ -1487,6 +1487,9 @@
               var note = why.textContent.trim();
               if (why.classList.contains('mine')) continue;
               if (/luis/i.test(note)) continue;
+              // Same rule the list builder uses: a slot that will never be
+              // filled is not work for anyone, so it is not hers to chase.
+              if (/^not needed/i.test(note)) continue;
               shouldList.push(slot);
             }
             var got = listed[sku] || [];
