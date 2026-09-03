@@ -1257,13 +1257,15 @@
       var g = head.getAttribute('data-grouphead');
       if (head.getAttribute('data-waitsync') === '1') return;
 
-      var seen = [], order = [];
-      rows.forEach(function (r) {
-        if (r.getAttribute('data-group') !== g) return;
+      // Read the DOM directly: the shared `rows` list only holds rows that
+      // carry data-search, and the child rows of a family do not all have it.
+      var order = [];
+      document.querySelectorAll('tbody tr[data-group="' + g + '"]').forEach(function (r) {
+        if (r.classList.contains('grouphead')) return;
         var n = readRow(r);
         if (!n.total) return;
         var label = n.done + '/' + n.total;
-        if (order.indexOf(label) === -1) { order.push(label); seen.push(n); }
+        if (order.indexOf(label) === -1) order.push(label);
       });
       if (!order.length) return;
 
