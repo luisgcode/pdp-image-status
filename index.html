@@ -199,6 +199,8 @@
   td.ghname b { font-weight: 700; }
   .ghtoggle { display: inline-block; width: 14px; color: var(--ink-soft); font-size: 12px; }
   .ghmeta { font-size: 12px; color: var(--ink-soft); font-family: var(--mono); margin-left: 6px; }
+  /* Image counts of the models inside a family, shown on the collapsed head. */
+  .ghcounts { font-size: 11.5px; font-family: var(--mono); color: var(--ink-soft); margin-left: 10px; white-space: nowrap; }
   td.ghsummary { text-align: left; font-size: 12.5px; color: var(--ink-soft); }
   td.ghstatus { text-align: left; padding-left: 16px; }
   tr.rowhidden { display: none; }
@@ -1248,6 +1250,37 @@
       });
     }
 
+    // A collapsed family hides its rows, so the head carries the image counts
+    // of the models inside it. One badge when they all match, every distinct
+    // count side by side when they do not.
+    function renderGroupCounts(head) {
+      var g = head.getAttribute('data-grouphead');
+      if (head.getAttribute('data-waitsync') === '1') return;
+
+      var seen = [], order = [];
+      rows.forEach(function (r) {
+        if (r.getAttribute('data-group') !== g) return;
+        var n = readRow(r);
+        if (!n.total) return;
+        var label = n.done + '/' + n.total;
+        if (order.indexOf(label) === -1) { order.push(label); seen.push(n); }
+      });
+      if (!order.length) return;
+
+      var cell = head.querySelector('.ghname');
+      if (!cell) return;
+      var old = cell.querySelector('.ghcounts');
+      if (old) old.parentNode.removeChild(old);
+
+      var span = document.createElement('span');
+      span.className = 'ghcounts';
+      span.textContent = order.join(' ');
+      span.title = order.length > 1
+        ? 'The models in this family have different image counts'
+        : 'Images loaded on the web, out of the slots that apply';
+      cell.appendChild(span);
+    }
+
     // Show/hide a group's data rows based on its collapsed state.
     function renderGroup(head) {
       var g = head.getAttribute('data-grouphead');
@@ -1335,6 +1368,7 @@
     renderScoreline();
 
     heads.forEach(function (head) {
+      renderGroupCounts(head);
       renderGroup(head);
       head.addEventListener('click', function () {
         if (input.value.trim() !== '') return; // no manual collapse while filtering
