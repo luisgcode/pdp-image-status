@@ -1303,8 +1303,8 @@
   (function () {
     var input = document.getElementById('filter');
     var countEl = document.getElementById('filtercount');
-    var rows = Array.prototype.slice.call(document.querySelectorAll('tbody tr[data-search]'));
-    var heads = Array.prototype.slice.call(document.querySelectorAll('tr.grouphead'));
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#imagesboard tbody tr[data-search]'));
+    var heads = Array.prototype.slice.call(document.querySelectorAll('#imagesboard tr.grouphead'));
 
     // ---------------------------------------------------------------
     // WORDING — every phrase the board can show lives here and nowhere
@@ -1354,7 +1354,7 @@
     // Count, pill and note for every product row, all from the same read.
     // Nothing here is written into the HTML by hand any more.
     function renderRows() {
-      document.querySelectorAll('tbody tr[data-group]').forEach(function (row) {
+      document.querySelectorAll('#imagesboard tbody tr[data-group]').forEach(function (row) {
         var n = readRow(row);
         if (!n.total) return;
 
@@ -1420,7 +1420,7 @@
       // Read the DOM directly: the shared `rows` list only holds rows that
       // carry data-search, and the child rows of a family do not all have it.
       var order = [];
-      document.querySelectorAll('tbody tr[data-group="' + g + '"]').forEach(function (r) {
+      document.querySelectorAll('#imagesboard tbody tr[data-group="' + g + '"]').forEach(function (r) {
         if (r.classList.contains('grouphead')) return;
         var n = readRow(r);
         if (!n.total) return;
@@ -1507,7 +1507,7 @@
       var box = document.getElementById('scoreline');
       if (!box) return;
       var counts = { done: 0, syncing: 0, review: 0 };
-      var rows = document.querySelectorAll('tbody tr[data-group]');
+      var rows = document.querySelectorAll('#imagesboard tbody tr[data-group]');
       rows.forEach(function (r) {
         var pill = r.querySelector('td.status .pill');
         if (!pill) return;
@@ -1602,7 +1602,7 @@
       btn.addEventListener('click', function () {
         if (!panel.hidden) { panel.hidden = true; btn.classList.remove('active'); return; }
         var html = '';
-        var oprows = Array.prototype.slice.call(document.querySelectorAll('tbody tr[data-search]'));
+        var oprows = Array.prototype.slice.call(document.querySelectorAll('#imagesboard tbody tr[data-search]'));
         oprows.forEach(function (r) {
           var tds = r.querySelectorAll('td');
           var missing = [];
@@ -2327,6 +2327,33 @@
         : 'Filter by product or SKU\u2026 (e.g. bold, ESN60, storm)';
       countEl.textContent = '';
     }
+
+    // ===== Tab Heatwave: tabla propia, logica propia =====
+    // Estos productos todavia no existen en Plytix, asi que aca no se calcula
+    // nada: las filas se muestran tal como estan escritas y las cabeceras solo
+    // abren y cierran. No comparte una linea de estado con el board de imagenes.
+    (function initHeatwave() {
+      var hb = document.getElementById('hwboard');
+      if (!hb) return;
+      var hHeads = Array.prototype.slice.call(hb.querySelectorAll('tr.grouphead'));
+      hHeads.forEach(function (head) {
+        function paint() {
+          var g = head.getAttribute('data-grouphead');
+          var collapsed = head.getAttribute('data-collapsed') === '1';
+          var tg = head.querySelector('.ghtoggle');
+          if (tg) tg.textContent = collapsed ? '▸' : '▾';
+          hb.querySelectorAll('tbody tr[data-group="' + g + '"]').forEach(function (r) {
+            r.classList.toggle('rowhidden', collapsed);
+          });
+        }
+        head.addEventListener('click', function () {
+          head.setAttribute('data-collapsed', head.getAttribute('data-collapsed') === '1' ? '0' : '1');
+          paint();
+        });
+        paint();
+      });
+    })();
+
     // The tab lives in the URL, so #attributes can be bookmarked and a
     // refresh lands back on the same tab instead of the images board.
     function tabFromHash() {
