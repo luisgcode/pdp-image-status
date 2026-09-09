@@ -2387,9 +2387,13 @@
       sec.setAttribute('data-family', fam.family.toLowerCase());
       sec.innerHTML = h;
 
-      // Everything stays open. A family only folds when I collapse it,
-      // or later when I mark it confirmed.
-      sec.setAttribute('data-collapsed', '0');
+      // A family with nothing pending is settled, so it starts folded and
+      // stops taking up room. The ones carrying a red notice stay open,
+      // because those are the ones still asking for something. That way the
+      // list keeps itself tidy: close a topic and its family folds on its own,
+      // no state to remember by hand. Clicking the header still opens any of
+      // them for a look.
+      sec.setAttribute('data-collapsed', fam.notShowing ? '0' : '1');
       return sec;
     }
 
