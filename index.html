@@ -2193,6 +2193,15 @@
       ]}
     ];
 
+    // Families I have called done. Only these fold on load.
+    var FOLDED = [
+      'Revillusion',
+      'Ignite XL',
+      'Ignite Evolve',
+      'Slim Linear',
+      'Prism'
+    ];
+
     var board = document.getElementById('attrboard');
     if (!board) return;
 
@@ -2387,13 +2396,11 @@
       sec.setAttribute('data-family', fam.family.toLowerCase());
       sec.innerHTML = h;
 
-      // A family with nothing pending is settled, so it starts folded and
-      // stops taking up room. The ones carrying a red notice stay open,
-      // because those are the ones still asking for something. That way the
-      // list keeps itself tidy: close a topic and its family folds on its own,
-      // no state to remember by hand. Clicking the header still opens any of
-      // them for a look.
-      sec.setAttribute('data-collapsed', fam.notShowing ? '0' : '1');
+      // Folded families are the ones I have called done, by name. No rule
+      // works this out on its own: a family folds when I say so and not
+      // before. Add a name to FOLDED to fold it, take it out to open it.
+      // Clicking the header still opens any of them for a look.
+      sec.setAttribute('data-collapsed', FOLDED.indexOf(fam.family) !== -1 ? '1' : '0');
       return sec;
     }
 
