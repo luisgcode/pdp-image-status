@@ -2199,7 +2199,15 @@
       'Ignite XL',
       'Ignite Evolve',
       'Slim Linear',
-      'Prism'
+      'Prism',
+      'e-MatriX',
+      'Optimyst Revive',
+      'Revillusion Log Sets',
+      'Optimyst Mapleton',
+      'Optimyst Aura',
+      'Ignite Ultra',
+      'Ignite Bold',
+      'Optimyst Linear'
     ];
 
     var board = document.getElementById('attrboard');
@@ -2447,13 +2455,25 @@
       if (cards) cards.style.display = collapsed ? 'none' : '';
       if (note) note.style.display = collapsed ? 'none' : '';
     }
+    // A folded family has nothing left asking for attention, so it drops to
+    // the bottom and the open ones keep the top of the page. Folding or
+    // opening one moves it straight away, so the order always matches what
+    // is actually still in play.
+    function sortFolded() {
+      Array.prototype.slice.call(board.querySelectorAll('.attrfam'))
+        .filter(function (sec) { return sec.getAttribute('data-collapsed') === '1'; })
+        .forEach(function (sec) { board.appendChild(sec); });
+    }
+
     board.querySelectorAll('.attrfam').forEach(function (sec) {
       paint(sec);
       sec.querySelector('.afhead').addEventListener('click', function () {
         sec.setAttribute('data-collapsed', sec.getAttribute('data-collapsed') === '1' ? '0' : '1');
         paint(sec);
+        sortFolded();
       });
     });
+    sortFolded();
 
     // One search box drives both boards.
     var input = document.getElementById('filter');
