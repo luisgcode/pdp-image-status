@@ -86,7 +86,11 @@
   #oliviabtn { margin-left: auto; background: #d9314e; color: #fff; border: none; border-radius: 6px; padding: 9px 18px; font-size: 13px; font-weight: 600; letter-spacing: 0.03em; cursor: pointer; }
   #oliviabtn:hover { background: #b8253e; }
   #oliviabtn.active { background: #1d1d1d; }
-  #oliviapanel { background: #fff; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; margin: 0 0 16px; overflow: hidden; }
+  .oppri { width: 34px; flex: 0 0 34px; text-align: center; font: 600 13px/1.2 inherit; color: #1d1d1d; border: 1px solid rgba(0,0,0,0.18); border-radius: 6px; padding: 5px 2px; background: #fff; }
+    .oppri:focus { outline: 2px solid #d9314e; outline-offset: 1px; }
+    .oppri.set { background: #d9314e; border-color: #d9314e; color: #fff; }
+    .oprow.pri { background: #fff6f7; }
+    #oliviapanel { background: #fff; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; margin: 0 0 16px; overflow: hidden; }
   .oppanel-head { padding: 12px 16px; background: #1d1d1d; color: #fff; display: flex; align-items: baseline; gap: 12px; }
   .oppanel-head b { font-size: 14px; }
   .oppanel-sub { font-size: 12px; color: rgba(255,255,255,0.65); }
@@ -1357,7 +1361,7 @@
 <script>
   // Build stamp. Bump BUILD whenever the board changes, so anyone can tell at
   // a glance whether their browser is showing the current copy.
-  var BUILD = '2026-08-21-02';
+  var BUILD = '2026-09-09-01';
 
   // Shared store for the notes on Olivia's list. With these two empty the
   // notes stay in each person's own browser; filled in, everyone sees the
@@ -1745,7 +1749,8 @@
           // Every line carries its own note box. The key is the SKU, so a
           // note stays with its product even when the board is re-rendered
           // or the list is filtered.
-          html += '<div class="oprow">' +
+          html += '<div class="oprow" data-row="' + sku + '">' +
+                  '<input class="oppri" type="text" inputmode="numeric" data-pri="' + sku + '" title="Priority. Lower number goes first, leave blank for no priority" aria-label="Priority for ' + sku + '">' +
                   '<span class="opname">' + name + ' <small>' + sku + '</small></span>' +
                   '<b class="opcount">' + missing.length + '</b>' + '<span class="opmiss">' + missing.join(' \u00b7 ') + '</span>' +
                   '<span class="opnote">' +
@@ -1894,7 +1899,54 @@
         }
         function autosize(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
 
+        // Priority lives in the same shared store as the notes, under a
+        // separate key per SKU, so Olivia sees the order I set and I see hers.
+        // A blank box means no priority. Lower number goes first.
+        function priKey(sku) { return 'pri:' + sku; }
+
+        // Sort the rows by priority without rebuilding them, so whatever is
+        // typed in a note box stays where it is. Rows with a number come
+        // first in order, everything else keeps the board's own order.
+        function sortByPriority(all) {
+          var rows = Array.prototype.slice.call(list.querySelectorAll('.oprow'));
+          if (!rows.length) return;
+          rows.forEach(function (row, i) { row._seen = i; });
+          rows.sort(function (a, b) {
+            var pa = parseInt(all[priKey(a.getAttribute('data-row'))], 10);
+            var pb = parseInt(all[priKey(b.getAttribute('data-row'))], 10);
+            var ha = !isNaN(pa), hb = !isNaN(pb);
+            if (ha && hb) return pa - pb || a._seen - b._seen;
+            if (ha) return -1;
+            if (hb) return 1;
+            return a._seen - b._seen;
+          });
+          rows.forEach(function (row) { list.appendChild(row); });
+        }
+
         pullNotes(function (saved) {
+          list.querySelectorAll('input[data-pri]').forEach(function (inp) {
+            var sku = inp.getAttribute('data-pri');
+            var v = saved[priKey(sku)];
+            if (v) { inp.value = v; inp.classList.add('set'); }
+            var row = list.querySelector('.oprow[data-row="' + sku + '"]');
+            if (row) row.classList.toggle('pri', !!v);
+
+            inp.addEventListener('input', function () {
+              // digits only, and blank clears the priority
+              var clean = inp.value.replace(/[^0-9]/g, '').slice(0, 3);
+              if (clean !== inp.value) inp.value = clean;
+              var all = readNotes();
+              if (clean) { all[priKey(sku)] = clean; } else { delete all[priKey(sku)]; }
+              inp.classList.toggle('set', !!clean);
+              if (row) row.classList.toggle('pri', !!clean);
+              pushNotes(all, sku);
+            });
+            // Reorder once the box loses focus, so the row does not jump
+            // out from under the cursor while a number is being typed.
+            inp.addEventListener('blur', function () { sortByPriority(readNotes()); });
+          });
+          sortByPriority(saved);
+
           list.querySelectorAll('textarea[data-note]').forEach(function (t) {
             var key = t.getAttribute('data-note');
             if (saved[key] && !t.value) { t.value = saved[key]; t.classList.add('filled'); }
