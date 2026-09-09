@@ -2089,8 +2089,8 @@
       { family: 'Optimyst Cassette Pro 500', models: [
         { name: 'Optimyst Cassette Pro 500 · Vapor Fireplace', sku: 'CDFI500-PRO', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Display Type', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type'] }
       ]},
-      { family: 'Optimyst RGB Cassette', notShowing: { attributes: ['Product Width (cm)', 'Product Depth/Length (cm)'], note: 'Bongiorno loaded six attributes and four came through, checked on the page Sep 9: Product Height (cm), Heat Vent location and Remote Control. Width and Depth in cm did not, and neither shows in inches either, so this product type carries no Width or Depth at all rather than missing one unit. Worth noting Heat Vent location arrived with the value N/A, so the attribute travels fine even when the value is deliberately empty.' }, models: [
-        { name: 'Optimyst RGB Cassette · Vapor', sku: '500004172', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'], fixed: ['Product Height (cm)', 'Heat Vent location', 'Remote Control'] }
+      { family: 'Optimyst RGB Cassette', models: [
+        { name: 'Optimyst RGB Cassette · Vapor', sku: '500004172', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Product Width(cm)', 'Product Depth/Length (cm)', 'Wattage', 'Product Weight (lb)', 'Product Weight (kg)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Battery Size in Remote Control', 'Battery Technology in Remote Control', 'Light bulb Type'], fixed: ['Product Height (cm)', 'Heat Vent location', 'Remote Control', 'Wattage', 'Product Weight (lb)', 'Product Weight (kg)', 'Product Width(cm)', 'Product Depth/Length (cm)'] }
       ]},
       { family: 'Vital Spark', notShowing: { attributes: ['Size', 'Fuel Type', 'Product Width (cm)', 'Product Width (in)', 'Product Depth/Length (cm)', 'Product Depth/Length (in)', 'Product Weight (kg)', 'Product Weight (lb)'], note: 'Bongiorno loaded the full set of measurements and only the two heights came through, re checked Sep 9. The heights DO show on all five. The cause is the Electric Fire spec list in Drupal: it carries Product Height in both units and no Width, Depth or Weight at all, so no product of this type can show them however well they are loaded. Size is the odd one out and the cheapest to fix: it IS in the Electric Fire list and shows on 68 of the 92 products in the catalogue, yet none of the thirteen Vital products shows it. Worth finding out why, because the data is already loaded.' }, models: [
         { name: 'Vital Spark 26" · Built-In', sku: 'SPK26', primary: ['Voltage', 'BTU', 'Timer', 'Product Height (in)', 'Warranty', 'Remote Control', 'Product Height (cm)', 'Brand'], secondary: [], fixed: ['Product Height (cm)', 'Product Height (in)', 'Remote Control', 'Timer'] },
@@ -2208,7 +2208,8 @@
       'Ignite Ultra',
       'Ignite Bold',
       'Optimyst Linear',
-      'Ignite Quest'
+      'Ignite Quest',
+      'Optimyst RGB Cassette'
     ];
 
     var board = document.getElementById('attrboard');
