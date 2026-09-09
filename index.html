@@ -2067,7 +2067,7 @@
         { name: 'Sierra 60" · Linear', sku: 'SIL60', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type'] },
         { name: 'Sierra 72" · Linear', sku: 'SIL72', primary: ['Voltage', 'BTU', 'Adjustable Flame Speed', 'Adjustable Brightness', 'Timer', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Display Type', 'Remote Control', 'Front Glass Type', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Decibels', 'Element Type', 'Battery Size in Remote Control', 'Product Finish', 'Battery Technology in Remote Control', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] }
       ]},
-      { family: 'F-Series Controls', notShowing: { attributes: ['Warranty', 'Adjustable Brightness', 'Remote Control', 'Battery Size in Remote Control', 'Product Height (in)', 'Product Height (cm)', 'Product Width (in)', 'Product Width (cm)', 'Product Depth/Length (in)', 'Product Depth/Length (cm)', 'Product Weight (lb)', 'Product Weight (kg)'], note: 'Bongiorno loaded twelve attributes on the onboard and eleven on the remote and NOT ONE of them came through, checked on the page Sep 9. These two pages show five and three attributes, the thinnest in the whole catalogue, and even Warranty and Brand are missing, which almost every other product carries. That points at the product type spec list being nearly empty for Thermostats rather than at anything she did. One thing did land: the BTF-0RW now shows Thermostat Type. Worth checking the value is right, since it reads Electronic/Digital and this product is a remote control with no thermostat of its own, so No Thermostat is the likely correct value.' }, models: [
+      { family: 'F-Series Controls', separate: true, notShowing: { attributes: ['Warranty', 'Adjustable Brightness', 'Remote Control', 'Battery Size in Remote Control', 'Product Height (in)', 'Product Height (cm)', 'Product Width (in)', 'Product Width (cm)', 'Product Depth/Length (in)', 'Product Depth/Length (cm)', 'Product Weight (lb)', 'Product Weight (kg)'], note: 'Bongiorno loaded twelve attributes on the onboard and eleven on the remote and NOT ONE of them came through, checked on the page Sep 9. These two pages show five and three attributes, the thinnest in the whole catalogue, and even Warranty and Brand are missing, which almost every other product carries. That points at the product type spec list being nearly empty for Thermostats rather than at anything she did. One thing did land: the BTF-0RW now shows Thermostat Type. Worth checking the value is right, since it reads Electronic/Digital and this product is a remote control with no thermostat of its own, so No Thermostat is the likely correct value.' }, models: [
         { name: 'F-SERIES Electronic Onboard Thermostat', sku: 'BTF-1CW', primary: ['Model Name/Series', 'Thermostat Type', 'Built-in Thermostat', 'Voltage', 'Model #'], secondary: [] },
         { name: 'F-SERIES Thermostat Remote', sku: 'BTF-0RW', primary: ['Model Name/Series', 'Thermostat Type', 'Model #'], secondary: [], fixed: ['Thermostat Type'] }
       ]},
@@ -2284,9 +2284,14 @@
         return m !== leader && allOf(m).length < leadSet.length;
       }).length;
 
+      // Some groups are kept together for convenience but are not a family:
+      // different products that happen to share a name. Comparing them to
+      // each other says nothing, so they are marked separate and each one
+      // is only ever measured against itself.
       var verdict, vcls;
       if (!loaded.length) { verdict = 'Nothing loaded yet'; vcls = 'empty'; }
       else if (loaded.length < models.length) { verdict = loaded.length + ' of ' + models.length + ' loaded'; vcls = 'empty'; }
+      else if (fam.separate) { verdict = models.length + ' separate products, not compared'; vcls = 'even'; }
       else if (behind) { verdict = behind + ' model' + (behind === 1 ? '' : 's') + ' below the leader'; vcls = 'uneven'; }
       else { verdict = 'All ' + models.length + ' loaded, even at ' + leadSet.length; vcls = 'even'; }
 
@@ -2317,7 +2322,7 @@
              esc(fam.dropped.note) + '</div>';
       }
 
-      if (extras.length) {
+      if (extras.length && !fam.separate) {
         h += '<div class="afalert"><b>Add to ' + esc(leader.name) + ':</b>' +
              chips(extras, 'extra') + '<span>shown by another model but not by the leader</span></div>';
       }
