@@ -306,8 +306,6 @@
   .afwait { margin: 6px 0 8px; padding: 5px 9px; border-radius: 6px; font-size: 12px; font-weight: 600; background: var(--pending-soft); color: var(--pending); border: 1px dashed var(--pending); }
   /* Loaded in Plytix but not showing on the page: a backlog, not a gap in
      the data, so it reads differently from a plain missing attribute. */
-  .afdropped { background: var(--panel-2, rgba(0,0,0,.04)); border: 1px solid var(--line, rgba(0,0,0,.14)); border-radius: 7px; padding: 8px 10px; margin: 8px 0; font-size: 12px; color: var(--ink-soft); }
-  .afdropped b { color: var(--ink); }
   .afpending { background: var(--missing-soft); border: 1px solid rgba(217,49,78,.3);
                border-radius: 4px; padding: 10px 13px; margin-bottom: 12px; font-size: 12.5px; }
   .afpending b { color: var(--missing); }
@@ -2073,7 +2071,7 @@
         { name: 'ELEMENT Electronic Onboard Thermostat · Dimplex', sku: 'BTEL-1CW', primary: ['Voltage', 'Warranty', 'Brand', 'Model Name/Series', 'Model #', 'Built-in Thermostat'], secondary: [], links: [{label:'US',href:'https://www.dimplex.com/en-us/element-electronic-onboard-thermostat#500005376'},{label:'CA',href:'https://www.dimplex.com/en-ca/element-electronic-onboard-thermostat'},{label:'FR',href:'https://www.dimplex.com/fr-ca/thermostat-electronique-integre-element'}] },
         { name: 'ELEMENT Thermostat Remote · Dimplex', sku: 'BTEL-0RW', primary: ['Brand', 'Model Name/Series', 'Model #'], secondary: [], links: [{label:'US',href:'https://www.dimplex.com/en-us/element-thermostat-remote#500005377'},{label:'CA',href:'https://www.dimplex.com/en-ca/element-thermostat-remote'},{label:'FR',href:'https://www.dimplex.com/fr-ca/telecommande-de-thermostat-element'}] }
       ]},
-      { family: 'BF Series', dropped: { attributes: ['Display Type'], note: 'The 33 was the only one showing it and the value read None, which tells a shopper nothing. I cleared it in Plytix instead of loading it on the other three.' }, models: [
+      { family: 'BF Series', models: [
         { name: 'BF Deluxe 33" · Built-In', sku: 'BF33DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
         { name: 'BF Deluxe 39" · Built-In', sku: 'BF39DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
         { name: 'BF Deluxe 45" · Built-In', sku: 'BF45DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
@@ -2319,14 +2317,6 @@
                return '<span class="afchip off">' + esc(a) + '</span>';
              }).join('') +
              '<span class="why">' + esc(pending.note) + '</span></div>';
-      }
-
-      // An attribute we decided to stop showing. Not a gap, so it reads
-      // neutral and the family stops being counted short for it.
-      if (fam.dropped) {
-        h += '<div class="afdropped"><b>Dropped on purpose:</b> ' +
-             esc(fam.dropped.attributes.join(', ')) + '. ' +
-             esc(fam.dropped.note) + '</div>';
       }
 
       if (extras.length && !fam.separate) {
