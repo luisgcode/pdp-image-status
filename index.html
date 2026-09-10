@@ -2070,8 +2070,8 @@
       { family: 'F-Series and Element Controls', separate: true, notShowing: { attributes: ['Adjustable Brightness', 'the whole set on the two Dimplex Element'], note: 'SOLVED for the Cadet pair on Sep 10, and the answer was the site. Four products here, not two: the same controls ship as F-Series on Cadet and Element on Dimplex. Everything up the chain had checked out all along. The value was in Plytix, it reached CommerceTools, and the attribute was in the Thermostats spec list. What was missing is that the three sites do NOT share this config: each has its own copy, and every fix made on Sep 9 and 10 had been made in one admin only. Adding the same attributes in the Cadet admin took the BTF-1CW from 5 attributes to 15 and the BTF-0RW from 3 to 13. What is left: Adjustable Brightness landed on neither, and the two Dimplex Element still show 6 and 3, so the same job is pending in the Dimplex admin for the Thermostats type. Worth noting the Legato are likely the same story from the Convectair admin, where Heat Pump carries 3 attributes in the US and 1 in Canada.' }, models: [
         { name: 'F-SERIES Electronic Onboard Thermostat · Cadet', sku: 'BTF-1CW', primary: ['Model Name/Series', 'Thermostat Type', 'Built-in Thermostat', 'Voltage', 'Model #', 'Product Height (in)', 'Product Height (cm)', 'Product Width(in)', 'Product Width(cm)', 'Product Depth/Length (in)', 'Product Depth/Length (cm)', 'Product Weight (lb)', 'Product Weight (kg)', 'Warranty', 'Remote Control'], secondary: [], fixed: ['Product Height (in)', 'Product Height (cm)', 'Product Width(in)', 'Product Width(cm)', 'Product Depth/Length (in)', 'Product Depth/Length (cm)', 'Product Weight (lb)', 'Product Weight (kg)', 'Warranty', 'Remote Control'] },
         { name: 'F-SERIES Thermostat Remote · Cadet', sku: 'BTF-0RW', primary: ['Model Name/Series', 'Thermostat Type', 'Model #', 'Product Height (in)', 'Product Height (cm)', 'Product Width(in)', 'Product Width(cm)', 'Product Depth/Length (in)', 'Product Depth/Length (cm)', 'Product Weight (lb)', 'Product Weight (kg)', 'Warranty', 'Battery Size in Remote Control'], secondary: [], fixed: ['Thermostat Type', 'Product Height (in)', 'Product Height (cm)', 'Product Width(in)', 'Product Width(cm)', 'Product Depth/Length (in)', 'Product Depth/Length (cm)', 'Product Weight (lb)', 'Product Weight (kg)', 'Warranty', 'Battery Size in Remote Control'] },
-        { name: 'ELEMENT Electronic Onboard Thermostat · Dimplex', sku: 'BTEL-1CW', primary: ['Voltage', 'Warranty', 'Brand', 'Model Name/Series', 'Model #', 'Built-in Thermostat'], secondary: [] },
-        { name: 'ELEMENT Thermostat Remote · Dimplex', sku: 'BTEL-0RW', primary: ['Brand', 'Model Name/Series', 'Model #'], secondary: [] }
+        { name: 'ELEMENT Electronic Onboard Thermostat · Dimplex', sku: 'BTEL-1CW', primary: ['Voltage', 'Warranty', 'Brand', 'Model Name/Series', 'Model #', 'Built-in Thermostat'], secondary: [], links: [{label:'US',href:'https://www.dimplex.com/en-us/element-electronic-onboard-thermostat#500005376'},{label:'CA',href:'https://www.dimplex.com/en-ca/element-electronic-onboard-thermostat'},{label:'FR',href:'https://www.dimplex.com/fr-ca/thermostat-electronique-integre-element'}] },
+        { name: 'ELEMENT Thermostat Remote · Dimplex', sku: 'BTEL-0RW', primary: ['Brand', 'Model Name/Series', 'Model #'], secondary: [], links: [{label:'US',href:'https://www.dimplex.com/en-us/element-thermostat-remote#500005377'},{label:'CA',href:'https://www.dimplex.com/en-ca/element-thermostat-remote'},{label:'FR',href:'https://www.dimplex.com/fr-ca/telecommande-de-thermostat-element'}] }
       ]},
       { family: 'BF Series', dropped: { attributes: ['Display Type'], note: 'The 33 was the only one showing it and the value read None, which tells a shopper nothing. I cleared it in Plytix instead of loading it on the other three.' }, models: [
         { name: 'BF Deluxe 33" · Built-In', sku: 'BF33DXP', primary: ['Voltage', 'BTU', 'Adjustable Brightness', 'Size', 'Product Height (in)', 'Warranty', 'Power Source', 'Heat Vent location', 'Remote Control', 'Product Height (cm)', 'Brand', 'Automatic Shut-Off'], secondary: ['Element Type', 'Product Finish', 'Light bulb Type', 'Cut Out Wall Dimensions - Height (in)'] },
@@ -2247,8 +2247,11 @@
       return map;
     })();
 
-    function localeLinks(sku) {
-      var links = LOCALE_LINKS[sku];
+    // Links normally come off the images board so a URL lives in one place
+    // only. A product that is tracked for attributes but not for images has
+    // no row there, so it can carry its own links on the model instead.
+    function localeLinks(sku, own) {
+      var links = (own && own.length) ? own : LOCALE_LINKS[sku];
       if (!links || !links.length) return '';
       return '<span class="aflinks">' + links.map(function (l) {
         return '<a href="' + l.href + '" target="_blank" rel="noopener" title="Open the ' +
@@ -2352,7 +2355,7 @@
         h += '<div class="' + cls + '" data-search="dimplex ' + esc((m.name + ' ' + m.sku).toLowerCase()) + '">';
         h += '<div class="afctop"><span class="afname">' + esc(m.name) +
              (m === leader && !blank ? '<span class="leadtag">most</span>' : '') +
-             '<span class="afsku">' + esc(m.sku) + '</span>' + localeLinks(m.sku) + '</span>' +
+             '<span class="afsku">' + esc(m.sku) + '</span>' + localeLinks(m.sku, m.links) + '</span>' +
              '<span class="afnum">' + (blank ? '\u2014' : n) + '</span></div>';
 
         if (blank) {
