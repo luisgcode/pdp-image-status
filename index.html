@@ -2379,7 +2379,10 @@
             h += '<div class="afwait">In Plytix, waiting for tonight: ' +
                  loading.map(esc).join(', ') + '</div>';
           }
-          var gapList = missing.slice();
+          // On a separate group nothing is measured against another product,
+          // so a gap can only be what this one is still waiting on, never
+          // what a sibling happens to show.
+          var gapList = fam.separate ? [] : missing.slice();
           loading.forEach(function (a) {
             if (gapList.indexOf(a) === -1) gapList.push(a);
           });
@@ -2399,7 +2402,7 @@
             h += '<div class="afgroup"><span class="aflabel">Secondary \u00b7 behind see more</span>' +
                  '<div class="afchips">' + chipsF(m.secondary, 'sec') + '</div></div>';
           }
-          if (!missing.length && m === leader && !extras.length) {
+          if (!missing.length && m === leader && !extras.length && !fam.separate) {
             h += '<div class="afeven">Sets the family standard</div>';
           }
         }
